@@ -20,7 +20,7 @@
     es: {
       copied: 'Mensaje copiado', copyFail: 'No se pudo copiar: selecciona el texto manualmente', emailCopied: 'Correo copiado',
       opening: 'Abriendo tu correo con el mensaje preparado…', openingWa: 'Abriendo WhatsApp con el mensaje preparado…',
-      menuOpen: 'Abrir menú', menuClose: 'Cerrar menú', videoDefault: 'Vídeo de Carmen Moreno',
+      agendaMore: n => `Ver todo el archivo (${n})`, menuOpen: 'Abrir menú', menuClose: 'Cerrar menú', videoDefault: 'Vídeo de Carmen Moreno',
       q: (n, t) => `Pregunta ${n} de ${t}`, back: '← Volver a la pregunta anterior', start: 'Tu punto de partida',
       format: m => `Formato recomendado: <strong>clases individuales ${m}</strong>.`,
       modes: { bcn: 'en Barcelona', online: 'online, desde donde estés', any: 'online o en Barcelona' },
@@ -34,7 +34,7 @@
     en: {
       copied: 'Message copied', copyFail: 'Could not copy: please select the text manually', emailCopied: 'Email address copied',
       opening: 'Opening your email with the message ready…', openingWa: 'Opening WhatsApp with the message ready…',
-      menuOpen: 'Open menu', menuClose: 'Close menu', videoDefault: 'Video by Carmen Moreno',
+      agendaMore: n => `See the full archive (${n})`, menuOpen: 'Open menu', menuClose: 'Close menu', videoDefault: 'Video by Carmen Moreno',
       q: (n, t) => `Question ${n} of ${t}`, back: '← Back to the previous question', start: 'Your starting point',
       format: m => `Recommended format: <strong>one-to-one lessons ${m}</strong>.`,
       modes: { bcn: 'in Barcelona', online: 'online, wherever you are', any: 'online or in Barcelona' },
@@ -48,7 +48,7 @@
     ca: {
       copied: 'Missatge copiat', copyFail: 'No s’ha pogut copiar: selecciona el text manualment', emailCopied: 'Correu copiat',
       opening: 'S’obre el teu correu amb el missatge preparat…', openingWa: 'S’obre WhatsApp amb el missatge preparat…',
-      menuOpen: 'Obre el menú', menuClose: 'Tanca el menú', videoDefault: 'Vídeo de Carmen Moreno',
+      agendaMore: n => `Mostra tot l’arxiu (${n})`, menuOpen: 'Obre el menú', menuClose: 'Tanca el menú', videoDefault: 'Vídeo de Carmen Moreno',
       q: (n, t) => `Pregunta ${n} de ${t}`, back: '← Torna a la pregunta anterior', start: 'El teu punt de partida',
       format: m => `Format recomanat: <strong>classes individuals ${m}</strong>.`,
       modes: { bcn: 'a Barcelona', online: 'en línia, siguis on siguis', any: 'en línia o a Barcelona' },
@@ -89,6 +89,10 @@
       const goingDown = y > last && y > 420;
       if (!document.body.classList.contains('menu-open')) header.classList.toggle('is-hidden', goingDown);
       last = y;
+      // Barra inferior (móvil) y WhatsApp (escritorio): aparecen al pasar la cabecera
+      // y se apartan al llegar al pie, donde ya están los mismos contactos
+      const nearEnd = y + innerHeight > document.documentElement.scrollHeight - 260;
+      document.body.classList.toggle('show-bar', y > innerHeight * .55 && !nearEnd);
       const max = document.documentElement.scrollHeight - innerHeight;
       if (bar) bar.style.transform = `scaleX(${max > 0 ? y / max : 0})`;
       ticking = false;
@@ -610,8 +614,22 @@
     const chips = $$('[data-gig-filter]');
     if (!chips.length) return;
     const gigs = $$('.gigs--archivo .gig');
+    // En móvil el archivo empieza en versión corta, con un botón para ver el resto
+    const VISIBLE = 6;
+    let more;
+    const expand = () => { gigs.forEach(g => g.classList.remove('is-extra')); more?.remove(); };
+    if (matchMedia('(max-width: 860px)').matches && gigs.length > VISIBLE + 2) {
+      gigs.slice(VISIBLE).forEach(g => g.classList.add('is-extra'));
+      more = document.createElement('button');
+      more.type = 'button';
+      more.className = 'btn btn--ghost gigs__more';
+      more.textContent = L.agendaMore(gigs.length);
+      more.addEventListener('click', expand);
+      $('.gigs--archivo').append(more);
+    }
     chips.forEach(chip => chip.addEventListener('click', () => {
       const f = chip.dataset.gigFilter;
+      expand();
       chips.forEach(c => c.setAttribute('aria-pressed', c === chip));
       gigs.forEach(g => { g.hidden = f !== 'todo' && g.dataset.tipo !== f; });
     }));

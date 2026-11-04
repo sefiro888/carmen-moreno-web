@@ -974,3 +974,68 @@ main { overflow-x: clip; }
 .library-search input { padding-left: 50px; border-radius: 999px; }
 .library-filters { margin-bottom: 0; }
 .library__empty { padding: 30px 0; border-top: 1px solid var(--line); color: var(--ink-2); }
+
+/* ==========================================================================
+   Pasada móvil y pulido visual
+   ========================================================================== */
+/* Enlaces legibles sobre fondos oscuros */
+.program .link-arrow, .card--dark .link-arrow, .on-dark .link-arrow, .section--dark .link-arrow, .section--wine .link-arrow { color: var(--gold-light); }
+/* Botones con texto largo: dos líneas cómodas en vez de apretadas */
+.btn { text-align: center; line-height: 1.25; padding-block: 12px; text-wrap: balance; }
+/* Varios enlaces seguidos */
+.link-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 30px; }
+/* Ventana de clase: la barra superior nunca se parte */
+.studio__bar span { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.studio__bar b { white-space: nowrap; }
+/* Zona táctil generosa en los puntos del mapa de festivales */
+.atlas__pin::before { content: ""; position: absolute; inset: -16px; }
+
+/* Barra fija inferior en móvil: reservar + WhatsApp, aparece al pasar la cabecera */
+.mbar { display: none; }
+@media (max-width: 860px) {
+  .wa-float { display: none; }
+  .mbar { position: fixed; left: 12px; right: 12px; bottom: calc(12px + env(safe-area-inset-bottom)); z-index: 120; display: flex; gap: 10px; padding: 8px; border-radius: 999px; background: rgba(21, 10, 13, .82); border: 1px solid rgba(220, 195, 143, .22); box-shadow: 0 18px 40px -12px rgba(0, 0, 0, .6); backdrop-filter: blur(14px) saturate(1.4); -webkit-backdrop-filter: blur(14px) saturate(1.4); transform: translateY(140%); opacity: 0; transition: transform .55s var(--ease), opacity .4s; }
+  .mbar .btn { flex: 1; min-height: 48px; width: auto; }
+  .mbar__wa { flex: none; display: grid; place-items: center; width: 48px; height: 48px; border-radius: 50%; background: #1f7a4d; color: #fff; }
+  .mbar__wa svg { width: 24px; height: 24px; fill: currentColor; }
+  .show-bar .mbar { transform: none; opacity: 1; }
+  .menu-open .mbar, body:has(.modal:not([hidden])) .mbar { transform: translateY(140%); opacity: 0; }
+  .site-footer { padding-bottom: 96px; }
+
+  /* Tipografía mínima legible y objetivos táctiles de 44 px */
+  .eyebrow { font-size: .8rem; letter-spacing: .18em; }
+  .card__num, .tl__tag, .gig__tag, .program__tag { font-size: .74rem; }
+  .page-hero__aside small, .caption, .frame figcaption { font-size: .78rem; }
+  .link-arrow { min-height: 44px; }
+  .anatomy__tabs { flex-wrap: nowrap; overflow-x: auto; margin-inline: calc(var(--gutter) * -1); padding: 2px var(--gutter) 8px; scrollbar-width: none; }
+  .anatomy__tabs .chip { flex: none; }
+  .anatomy__figure { max-width: 420px; }
+}
+@media (max-width: 560px) {
+  .frame::before { display: none; }
+  .frame figcaption { margin-top: 14px; }
+  .page-hero { min-height: clamp(480px, 88svh, 700px); }
+}
+
+/* Escritorio: el botón de WhatsApp también espera a que pases la cabecera */
+.wa-float { transform: translateY(24px) scale(.9); opacity: 0; visibility: hidden; }
+.show-bar .wa-float { transform: none; opacity: 1; visibility: visible; }
+.show-bar .wa-float:hover, .show-bar .wa-float:focus-visible { transform: translateY(-3px); }
+
+/* Archivo de la agenda: versión corta en móvil */
+.gig.is-extra { display: none; }
+.gigs__more { justify-self: center; margin-top: 10px; }
+
+/* Transiciones suaves entre páginas (navegadores compatibles) */
+@view-transition { navigation: auto; }
+::view-transition-old(root) { animation: vtOut .32s var(--ease) both; }
+::view-transition-new(root) { animation: vtIn .55s var(--ease) both; }
+@keyframes vtOut { to { opacity: 0; transform: translateY(-10px); } }
+@keyframes vtIn { from { opacity: 0; transform: translateY(14px); } }
+@media (prefers-reduced-motion: reduce) { ::view-transition-old(root), ::view-transition-new(root) { animation: none; } }
+.menu-open.show-bar .wa-float { opacity: 0; visibility: hidden; }
+/* Respuesta táctil sutil */
+html { -webkit-tap-highlight-color: transparent; }
+@media (hover: none) {
+  .btn:active, .program:active, .vcard:active, .chip:active, .gallery__item:active, .article-card:active { transform: scale(.97); transition: transform .12s; }
+}
