@@ -121,10 +121,17 @@
   function initReveal() {
     const els = $$('.reveal, .clip');
     if (!('IntersectionObserver' in window) || reduced) { els.forEach(e => e.classList.add('is-in')); return; }
+    // Un elemento .clip empieza recortado del todo (clip-path) y el navegador lo considera
+    // invisible: ni lo detecta al hacer scroll ni descarga su foto. Por eso se vigila su
+    // contenedor y, al aparecer este, se abren también los .clip que tenga dentro.
     const io = new IntersectionObserver(entries => entries.forEach(en => {
-      if (en.isIntersecting) { en.target.classList.add('is-in'); io.unobserve(en.target); }
+      if (!en.isIntersecting) return;
+      en.target.classList.add('is-in');
+      $$('.clip', en.target).forEach(c => c.classList.add('is-in'));
+      io.unobserve(en.target);
     }), { rootMargin: '0px 0px -8% 0px', threshold: .08 });
-    els.forEach(e => io.observe(e));
+    const targets = new Set(els.map(e => e.classList.contains('clip') ? e.parentElement : e));
+    targets.forEach(e => io.observe(e));
   }
 
   function initCounters() {
