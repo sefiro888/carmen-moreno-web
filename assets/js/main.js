@@ -375,9 +375,83 @@
       btns.forEach(b => b.setAttribute('aria-pressed', b.dataset.zone === z));
       panels.forEach(p => { p.hidden = p.dataset.for !== z; });
       zones.forEach(s => s.classList.toggle('is-active', s.dataset.for === z));
+      // La animación 3D de la zona elegida se reproduce; las demás se paran
+      panels.forEach(p => $$('video', p).forEach(v => {
+        if (p.hidden || reduced) { v.pause(); return; }
+        if (inView) v.play().catch(() => {});
+      }));
     };
+    // Solo se reproducen cuando el mapa está en pantalla
+    let inView = false;
+    new IntersectionObserver(([e]) => { inView = e.isIntersecting; select(root.dataset.active); }, { threshold: .2 }).observe(root);
     btns.forEach(b => b.addEventListener('click', () => select(b.dataset.zone)));
     select(btns[0]?.dataset.zone);
+  }
+
+  /* ---------- Podcast ---------- */
+  function initPodcast() {
+    const box = $('[data-podcast]');
+    if (!box) return;
+    const audio = $('[data-pod-audio]', box);
+    const eps = $$('.pod__ep', box);
+    const play = $('[data-pod-play]', box);
+    const seek = $('[data-pod-seek]', box);
+    const cur = $('[data-pod-cur]', box);
+    const dur = $('[data-pod-dur]', box);
+    const speedBtn = $('[data-pod-speed]', box);
+    const speeds = [1, 1.25, 1.5, .75];
+    let speed = 0;
+    const fmt = s => isFinite(s) ? `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}` : '0:00';
+    const load = (btn, autoplay) => {
+      eps.forEach(e => e.setAttribute('aria-current', e === btn));
+      $('[data-pod-n]', box).textContent = btn.dataset.n;
+      $('[data-pod-title]', box).textContent = $('.pod__t', btn).textContent;
+      dur.textContent = $('.pod__d', btn).textContent;
+      if (audio.dataset.src !== btn.dataset.src) {
+        audio.src = btn.dataset.src; audio.dataset.src = btn.dataset.src;
+        seek.value = 0; cur.textContent = '0:00';
+      }
+      audio.playbackRate = speeds[speed];
+      if (autoplay) audio.play().catch(() => {});
+    };
+    eps.forEach(b => b.addEventListener('click', () => load(b, true)));
+    play.addEventListener('click', () => {
+      if (!audio.dataset.src) load(eps.find(e => e.getAttribute('aria-current') === 'true') || eps[0], false);
+      audio.paused ? audio.play().catch(() => {}) : audio.pause();
+    });
+    speedBtn.addEventListener('click', () => {
+      speed = (speed + 1) % speeds.length;
+      audio.playbackRate = speeds[speed];
+      speedBtn.textContent = String(speeds[speed]).replace('.', ',') + '×';
+    });
+    audio.addEventListener('play', () => { box.classList.add('is-playing'); play.setAttribute('aria-label', box.dataset.labelPause); });
+    audio.addEventListener('pause', () => { box.classList.remove('is-playing'); play.setAttribute('aria-label', box.dataset.labelPlay); });
+    audio.addEventListener('loadedmetadata', () => { dur.textContent = fmt(audio.duration); });
+    audio.addEventListener('timeupdate', () => {
+      cur.textContent = fmt(audio.currentTime);
+      if (audio.duration) seek.value = Math.round(audio.currentTime / audio.duration * 1000);
+    });
+    seek.addEventListener('input', () => { if (audio.duration) audio.currentTime = seek.value / 1000 * audio.duration; });
+    audio.addEventListener('ended', () => {
+      const i = eps.findIndex(e => e.getAttribute('aria-current') === 'true');
+      if (eps[i + 1]) load(eps[i + 1], true);
+    });
+    // Enlace directo a un episodio (por ejemplo, desde el mapa del método): academia.html#podcast-3
+    const pick = () => {
+      const m = location.hash.match(/^#podcast-(\d)$/);
+      const btn = m && $('#podcast-' + m[1]);
+      if (btn) { load(btn, false); box.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'center' }); }
+    };
+    addEventListener('hashchange', pick);
+    // Fichas de episodio (página del podcast): «Escuchar» reproduce ese episodio y sube al reproductor
+    $$('[data-pod-go]').forEach(btn => btn.addEventListener('click', () => {
+      const ep = $('#podcast-' + btn.dataset.podGo);
+      if (!ep) return;
+      load(ep, true);
+      box.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'center' });
+    }));
+    eps[0] && load(eps[0], false);
+    pick();
   }
 
   /* ---------- Línea del tiempo ---------- */
@@ -670,6 +744,7 @@
     initContact();
     initAgenda();
     initLibrary();
+    initPodcast();
     initStudio();
   });
 })();
