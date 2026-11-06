@@ -375,6 +375,10 @@
       btns.forEach(b => b.setAttribute('aria-pressed', b.dataset.zone === z));
       panels.forEach(p => { p.hidden = p.dataset.for !== z; });
       zones.forEach(s => s.classList.toggle('is-active', s.dataset.for === z));
+      // Lámina del gesto: si no tiene, el texto ocupa todo el ancho
+      const laminas = $$('.anat-lamina', root);
+      laminas.forEach(f => f.classList.toggle('is-active', f.dataset.for === z));
+      root.classList.toggle('no-fig', !laminas.some(f => f.dataset.for === z));
       // La animación 3D de la zona elegida se reproduce; las demás se paran
       panels.forEach(p => $$('video', p).forEach(v => {
         if (p.hidden || reduced) { v.pause(); return; }

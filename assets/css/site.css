@@ -1172,3 +1172,25 @@ html { -webkit-tap-highlight-color: transparent; }
 .fuente-ref strong { font: 600 .72rem var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--ink-2); margin-right: 4px; }
 .fuente-ref a { color: var(--gold); font-weight: 600; white-space: nowrap; }
 .fuente-wrap--tips { grid-column: 1 / -1; }
+
+/* ---------- Mapa del método: láminas del libro en lugar de la silueta ---------- */
+.anatomy:not(.no-fig) { align-items: start; }
+.anat-laminas { max-width: 600px; position: sticky; top: calc(var(--header-h, 80px) + 30px); }
+.anat-lamina { display: none; margin: 0; padding: clamp(14px, 2vw, 22px); border-radius: 10px; background: #fbf7ef; box-shadow: 0 40px 80px -40px rgba(0, 0, 0, .7), 0 0 0 1px rgba(220, 195, 143, .35); }
+.anat-lamina.is-active { display: block; animation: laminaIn .6s var(--ease) both; }
+@keyframes laminaIn { from { opacity: 0; transform: translateY(14px) scale(.98); } }
+@media (max-width: 860px) {
+  /* En el móvil: pestañas, lámina y texto, en ese orden, para ver el cambio al tocar */
+  .anatomy > div:last-child { display: contents; }
+  .anatomy .anatomy__tabs { order: 0; }
+  .anatomy .anatomy__figure { order: 1; position: static; }
+  .anatomy .anatomy__panel { order: 2; }
+  .anatomy:not(.no-fig) { gap: 26px; }
+}
+@media (prefers-reduced-motion: reduce) { .anat-lamina.is-active { animation: none; } }
+.anat-lamina img { display: block; width: 100%; height: auto; border-radius: 4px; }
+.anat-lamina figcaption { margin-top: 12px; font-size: .8rem; line-height: 1.5; color: #6b5a50; }
+.anatomy.no-fig { grid-template-columns: minmax(0, 1fr); }
+.anatomy.no-fig .anatomy__figure { display: none; }
+.anatomy.no-fig > div:last-child { width: 100%; max-width: 780px; margin-inline: auto; }
+.anatomy.no-fig .anatomy__tabs { justify-content: center; }
