@@ -1165,3 +1165,10 @@ html { -webkit-tap-highlight-color: transparent; }
 .aula__pasos li { counter-increment: paso; position: relative; padding: 16px 18px 16px 64px; border: 1px solid var(--line); border-radius: 8px; background: var(--paper); }
 .aula__pasos li::before { content: counter(paso); position: absolute; left: 18px; top: 50%; transform: translateY(-50%); width: 32px; height: 32px; display: grid; place-items: center; border-radius: 50%; background: var(--gold); color: #fff; font: 600 .95rem var(--sans); }
 @media (prefers-reduced-motion: reduce) { .aula__live i { animation: none; } }
+
+/* ---------- Procedencia de cada artículo de la Academia ---------- */
+.fuente-wrap { margin-top: 34px; }
+.fuente-ref { margin: 0; padding: 14px 18px; border-top: 1px solid var(--line); font-size: .86rem; line-height: 1.6; color: var(--muted); }
+.fuente-ref strong { font: 600 .72rem var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--ink-2); margin-right: 4px; }
+.fuente-ref a { color: var(--gold); font-weight: 600; white-space: nowrap; }
+.fuente-wrap--tips { grid-column: 1 / -1; }
