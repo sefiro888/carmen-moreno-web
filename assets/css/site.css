@@ -1146,3 +1146,22 @@ html { -webkit-tap-highlight-color: transparent; }
 .ep-card h3 { margin: 4px 0 0; font-size: 1.5rem; }
 .ep-card p { margin: 0; flex: 1; font-size: .96rem; color: var(--ink-2); }
 .ep-card__play { align-self: flex-start; margin-top: 6px; padding: 0; border: 0; background: none; cursor: pointer; }
+
+/* ---------- Aula online (código de Meet) ---------- */
+.aula__form { display: grid; gap: 18px; }
+.aula__live { display: inline-flex; align-items: center; gap: 10px; justify-self: start; padding: 6px 14px; border-radius: 99px; background: rgba(180, 141, 76, .14); font: 600 .72rem var(--sans); letter-spacing: .16em; text-transform: uppercase; color: var(--ink-2); }
+.aula__live i { width: 8px; height: 8px; border-radius: 50%; background: #c0392b; box-shadow: 0 0 0 0 rgba(192, 57, 43, .6); animation: aulaPulse 1.8s infinite; }
+@keyframes aulaPulse { 70% { box-shadow: 0 0 0 10px rgba(192, 57, 43, 0); } 100% { box-shadow: 0 0 0 0 rgba(192, 57, 43, 0); } }
+.field .aula__input { min-height: 72px; font: 500 clamp(1.5rem, 4vw, 2rem) var(--sans); letter-spacing: .12em; text-align: center; }
+.aula__input::placeholder { color: var(--muted); opacity: .45; }
+.aula__help, .aula__note { margin: 8px 0 0; font-size: .88rem; color: var(--muted); }
+.aula__note { margin: 0; padding-top: 16px; border-top: 1px solid var(--line); }
+.aula__btn { width: 100%; justify-content: center; min-height: 60px; font-size: 1.05rem; }
+.aula__estado { margin: 0; min-height: 1.4em; font-size: .95rem; color: var(--ink-2); }
+.aula__estado a { color: var(--gold); font-weight: 600; }
+.aula__form.is-error .aula__input { border-color: #b03a2e; box-shadow: 0 0 0 4px rgba(176, 58, 46, .14); }
+.aula__form.is-error .aula__estado { color: #b03a2e; }
+.aula__pasos { counter-reset: paso; list-style: none; margin: 28px 0 0; padding: 0; display: grid; gap: 14px; }
+.aula__pasos li { counter-increment: paso; position: relative; padding: 16px 18px 16px 64px; border: 1px solid var(--line); border-radius: 8px; background: var(--paper); }
+.aula__pasos li::before { content: counter(paso); position: absolute; left: 18px; top: 50%; transform: translateY(-50%); width: 32px; height: 32px; display: grid; place-items: center; border-radius: 50%; background: var(--gold); color: #fff; font: 600 .95rem var(--sans); }
+@media (prefers-reduced-motion: reduce) { .aula__live i { animation: none; } }

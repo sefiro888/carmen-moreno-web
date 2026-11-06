@@ -724,6 +724,40 @@
     setInterval(() => { notes.forEach((n, i) => n.classList.toggle('is-on', i === k)); k = (k + 1) % notes.length; }, 520);
   }
 
+  /* ---------- Aula: el alumno escribe el código de Meet y se abre en otra ventana ---------- */
+  function meetCode(value) {
+    let v = (value || '').trim().toLowerCase();
+    const m = v.match(/meet\.google\.com\/([a-z-]+)/);
+    if (m) v = m[1];
+    v = v.replace(/[^a-z]/g, '');
+    return /^[a-z]{10}$/.test(v) ? `${v.slice(0, 3)}-${v.slice(3, 7)}-${v.slice(7)}` : null;
+  }
+  function initAula() {
+    const form = $('#aula-form');
+    if (!form) return;
+    const input = $('#aula-codigo', form);
+    const estado = $('.aula__estado', form);
+    const D = form.dataset;
+    const desdeEnlace = new URLSearchParams(location.search).get('codigo');
+    if (desdeEnlace && meetCode(desdeEnlace)) input.value = meetCode(desdeEnlace);
+    input.addEventListener('input', () => { form.classList.remove('is-error'); estado.textContent = ''; });
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      const code = meetCode(input.value);
+      if (!code) {
+        form.classList.add('is-error');
+        estado.textContent = input.value.trim() ? D.bad : D.empty;
+        input.focus();
+        return;
+      }
+      input.value = code;
+      const url = `https://meet.google.com/${code}`;
+      window.open(url, '_blank', 'noopener');
+      form.classList.remove('is-error');
+      estado.innerHTML = `${D.opened} <a href="${url}" target="_blank" rel="noopener">${D.retry}</a>`;
+    });
+  }
+
   document.addEventListener('DOMContentLoaded', () => {
     initIntro();
     initHeader();
@@ -746,5 +780,6 @@
     initLibrary();
     initPodcast();
     initStudio();
+    initAula();
   });
 })();
