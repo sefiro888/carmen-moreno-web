@@ -6,7 +6,7 @@
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const finePointer = matchMedia('(hover: hover) and (pointer: fine)').matches;
   // El correo y el WhatsApp se definen en build.mjs (SITE) y llegan en <body data-…>
-  const EMAIL = document.body.dataset.email || 'sopranosun@gmail.com';
+  const EMAIL = document.body.dataset.email || 'carmen@mitecnicavocalpasoapaso.com';
   const WA = document.body.dataset.wa || '';
   const LANG = (document.documentElement.lang || 'es').slice(0, 2);
 
