@@ -1194,3 +1194,24 @@ html { -webkit-tap-highlight-color: transparent; }
 .anatomy.no-fig .anatomy__figure { display: none; }
 .anatomy.no-fig > div:last-child { width: 100%; max-width: 780px; margin-inline: auto; }
 .anatomy.no-fig .anatomy__tabs { justify-content: center; }
+
+/* ---------- Pantalla final del vídeo (telón que se cierra al acabar) ---------- */
+.vend { position: relative; display: inline-block; max-width: 100%; overflow: hidden; border-radius: 6px; vertical-align: top; }
+.vend video { display: block; }
+.vend__end { position: absolute; inset: 0; display: grid; place-items: center; text-align: center; color: var(--gold-pale); pointer-events: none; }
+.vend.is-ended .vend__end { pointer-events: auto; }
+.vend__curtain { position: absolute; top: 0; bottom: 0; width: 50.5%; background: #3a0a10 url("../img/escena-telon--960.webp") center / cover; transition: transform 1.4s cubic-bezier(.7, 0, .2, 1); }
+.vend__curtain--l { left: 0; background-position: 20% 50%; transform: translateX(-102%); }
+.vend__curtain--r { right: 0; background-position: 80% 50%; transform: translateX(102%); }
+.vend__curtain::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(0, 0, 0, .35), transparent 30%, transparent 70%, rgba(0, 0, 0, .35)); }
+.vend.is-ended .vend__curtain { transform: none; }
+.vend__content { position: relative; z-index: 2; padding: 20px; opacity: 0; transform: translateY(14px); transition: opacity .8s var(--ease), transform .8s var(--ease); }
+.vend.is-ended .vend__content { opacity: 1; transform: none; transition-delay: 1.1s; }
+.vend__content svg { width: min(260px, 70%); margin: 0 auto 14px; }
+.vend__content svg path { fill: none; stroke: var(--gold-light); stroke-width: 1; }
+.vend__content svg circle { fill: var(--gold-light); }
+.vend__name { margin: 0; font: 500 clamp(2rem, 6vw, 3.2rem)/1 var(--serif); letter-spacing: .02em; }
+.vend__sub { margin: 12px 0 26px; font-size: .68rem; letter-spacing: .26em; text-transform: uppercase; color: var(--gold); }
+.vend__actions { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+.vend__actions .btn--ghost { color: var(--gold-pale); }
+@media (prefers-reduced-motion: reduce) { .vend__curtain, .vend__content { transition: none !important; } }

@@ -21,6 +21,7 @@
       copied: 'Mensaje copiado', copyFail: 'No se pudo copiar: selecciona el texto manualmente', emailCopied: 'Correo copiado',
       opening: 'Abriendo tu correo con el mensaje preparado…', openingWa: 'Abriendo WhatsApp con el mensaje preparado…',
       agendaMore: n => `Ver todo el archivo (${n})`, menuOpen: 'Abrir menú', menuClose: 'Cerrar menú', videoDefault: 'Vídeo de Carmen Moreno',
+      endSub: 'Soprano · Maestra de técnica vocal', endReplay: 'Volver a verlo', endBook: 'Reservar una clase',
       q: (n, t) => `Pregunta ${n} de ${t}`, back: '← Volver a la pregunta anterior', start: 'Tu punto de partida',
       format: m => `Formato recomendado: <strong>clases individuales ${m}</strong>.`,
       modes: { bcn: 'en Barcelona', online: 'online, desde donde estés', any: 'online o en Barcelona' },
@@ -35,6 +36,7 @@
       copied: 'Message copied', copyFail: 'Could not copy: please select the text manually', emailCopied: 'Email address copied',
       opening: 'Opening your email with the message ready…', openingWa: 'Opening WhatsApp with the message ready…',
       agendaMore: n => `See the full archive (${n})`, menuOpen: 'Open menu', menuClose: 'Close menu', videoDefault: 'Video by Carmen Moreno',
+      endSub: 'Soprano · Vocal technique teacher', endReplay: 'Watch again', endBook: 'Book a lesson',
       q: (n, t) => `Question ${n} of ${t}`, back: '← Back to the previous question', start: 'Your starting point',
       format: m => `Recommended format: <strong>one-to-one lessons ${m}</strong>.`,
       modes: { bcn: 'in Barcelona', online: 'online, wherever you are', any: 'online or in Barcelona' },
@@ -49,6 +51,7 @@
       copied: 'Missatge copiat', copyFail: 'No s’ha pogut copiar: selecciona el text manualment', emailCopied: 'Correu copiat',
       opening: 'S’obre el teu correu amb el missatge preparat…', openingWa: 'S’obre WhatsApp amb el missatge preparat…',
       agendaMore: n => `Mostra tot l’arxiu (${n})`, menuOpen: 'Obre el menú', menuClose: 'Tanca el menú', videoDefault: 'Vídeo de Carmen Moreno',
+      endSub: 'Soprano · Mestra de tècnica vocal', endReplay: 'Torna a veure’l', endBook: 'Reserva una classe',
       q: (n, t) => `Pregunta ${n} de ${t}`, back: '← Torna a la pregunta anterior', start: 'El teu punt de partida',
       format: m => `Format recomanat: <strong>classes individuals ${m}</strong>.`,
       modes: { bcn: 'a Barcelona', online: 'en línia, siguis on siguis', any: 'en línia o a Barcelona' },
@@ -520,12 +523,38 @@
     $('.modal__body').innerHTML = `<figure style="margin:0"><img src="${escAttr(btn.dataset.full)}" alt="${escAttr(btn.dataset.caption || '')}"><figcaption class="modal__caption">${escAttr(btn.dataset.caption || '')}</figcaption></figure>`;
   }
 
+  /* Pantalla final del vídeo (data-end="telon"): se cierra el telón, como en la entrada, con el nombre y dos botones */
+  const endScreen = () => `<div class="vend__end">
+      <div class="vend__curtain vend__curtain--l"></div><div class="vend__curtain vend__curtain--r"></div>
+      <div class="vend__content">
+        <svg viewBox="0 0 360 60" aria-hidden="true"><path d="M0 10h360"/><path d="M0 20h360"/><path d="M0 30h360"/><path d="M0 40h360"/><path d="M0 50h360"/><circle cx="110" cy="45" r="5"/><circle cx="160" cy="25" r="5"/><circle cx="210" cy="35" r="5"/><circle cx="260" cy="15" r="5"/></svg>
+        <p class="vend__name">Carmen Moreno</p>
+        <p class="vend__sub">${L.endSub}</p>
+        <div class="vend__actions">
+          <a class="btn btn--gold" href="escuela-online.html#reserva">${L.endBook}</a>
+          <button class="btn btn--ghost" type="button" data-replay>${L.endReplay}</button>
+        </div>
+      </div>
+    </div>`;
+  function initEndScreen(box) {
+    if (!box) return;
+    const v = $('video', box), end = $('.vend__end', box);
+    const show = on => { box.classList.toggle('is-ended', on); end.setAttribute('aria-hidden', String(!on)); end.inert = !on; };
+    show(false);
+    v.addEventListener('ended', () => { show(true); setTimeout(() => $('.btn--gold', end).focus({ preventScroll: true }), 1200); });
+    v.addEventListener('play', () => show(false));
+    $('[data-replay]', end).addEventListener('click', () => { v.currentTime = 0; v.play(); });
+  }
+
   function initVideos() {
     $$('[data-video]').forEach(card => {
       const src = card.dataset.video;
       const caption = card.dataset.caption || '';
       card.addEventListener('click', () => {
-        modal.open(`<figure style="margin:0"><video src="${escAttr(src)}" controls autoplay playsinline poster="${escAttr(card.dataset.poster || '')}"></video>${caption ? `<figcaption class="modal__caption">${escAttr(caption)}</figcaption>` : ''}</figure>`, card);
+        const video = `<video src="${escAttr(src)}" controls autoplay playsinline poster="${escAttr(card.dataset.poster || '')}"></video>`;
+        const telon = card.dataset.end === 'telon';
+        modal.open(`<figure style="margin:0">${telon ? `<div class="vend">${video}${endScreen()}</div>` : video}${caption ? `<figcaption class="modal__caption">${escAttr(caption)}</figcaption>` : ''}</figure>`, card);
+        if (telon) initEndScreen($('#modal .vend'));
       });
       if (finePointer && !reduced && card.classList.contains('vcard')) {
         let v;
