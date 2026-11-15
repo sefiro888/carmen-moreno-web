@@ -142,18 +142,33 @@
     </div>
     <div class="atlas">
       <div class="reveal reveal--zoom">
+      <p class="atlas__stats"><span><b data-n="12">12</b> veces</span><span><b data-n="4">4</b> países</span><span>2008 – 2023</span></p>
       <div class="atlas__map">
         <svg viewBox="0 0 100 80" preserveAspectRatio="none" aria-hidden="true">
-          <path class="atlas__arc" d="M29.6 68 Q14 40 8.7 15.7"/>
-          <path class="atlas__arc" d="M29.6 68 Q58 32 86.9 24.7"/>
-          <path class="atlas__arc" d="M29.6 68 Q60 18 90.4 13.8"/>
-          <path class="atlas__arc" d="M29.6 68 Q54 48 77.8 34.2"/>
+          <defs>
+            <mask id="arco-origen"><path class="atlas__wipe" style="--dw:0s" d="M-6 94 Q10 86 29.6 68" pathLength="1"/></mask>
+            <mask id="arco-gales"><path class="atlas__wipe" style="--dw:.7s" d="M29.6 68 Q14 40 8.7 15.7" pathLength="1"/></mask>
+            <mask id="arco-cracovia"><path class="atlas__wipe" style="--dw:1s" d="M29.6 68 Q58 32 86.9 24.7" pathLength="1"/></mask>
+            <mask id="arco-bratislava"><path class="atlas__wipe" style="--dw:1.3s" d="M29.6 68 Q54 48 77.8 34.2" pathLength="1"/></mask>
+            <mask id="arco-varsovia"><path class="atlas__wipe" style="--dw:1.6s" d="M29.6 68 Q60 18 90.4 13.8" pathLength="1"/></mask>
+          </defs>
+          <g class="atlas__land">
+            <path d="M7 27 Q3 20 6 14 Q7 8 12 4 Q16 7 13 13 Q15 17 11 22 Q10 25 7 27 Z"/>
+            <path d="M19 33 Q24 30 30 29 Q36 27 41 23 Q46 18 52 15 Q58 13 64 15 Q70 14 78 12 Q84 10 90 6"/>
+            <path d="M19 33 Q15 40 15 47 Q11 52 12 60 Q11 68 16 75 Q22 78 27 72 Q31 68 36 65 Q40 62 45 61 Q49 63 51 69 Q53 75 57 78"/>
+            <path d="M46 12 Q53 5 61 2"/>
+          </g>
+          <path class="atlas__arc atlas__arc--origen" d="M-6 94 Q10 86 29.6 68" mask="url(#arco-origen)"/>
+          <path class="atlas__arc" d="M29.6 68 Q14 40 8.7 15.7" mask="url(#arco-gales)"/>
+          <path class="atlas__arc" d="M29.6 68 Q58 32 86.9 24.7" mask="url(#arco-cracovia)"/>
+          <path class="atlas__arc" d="M29.6 68 Q60 18 90.4 13.8" mask="url(#arco-varsovia)"/>
+          <path class="atlas__arc" d="M29.6 68 Q54 48 77.8 34.2" mask="url(#arco-bratislava)"/>
         </svg>
-        <button class="atlas__pin atlas__pin--home" type="button" data-city="bcn" style="left:29.6%;top:85%"><i></i><b>Barcelona · Vic<small>Casa · Cantonigròs 2015</small></b></button>
-        <button class="atlas__pin" type="button" data-city="gales" style="left:8.7%;top:19.6%"><i></i><b>Carmarthen<small>Gales · 2008</small></b></button>
-        <button class="atlas__pin atlas__pin--left" type="button" data-city="cracovia" style="left:86.9%;top:30.9%"><i></i><b>Cracovia<small>2010 – 2013 · 2019</small></b></button>
-        <button class="atlas__pin atlas__pin--left" type="button" data-city="varsovia" style="left:90.4%;top:17.3%"><i></i><b>Varsovia<small>2014 · 2016 · 2018 · 2023</small></b></button>
-        <button class="atlas__pin atlas__pin--left" type="button" data-city="bratislava" style="left:77.8%;top:42.8%"><i></i><b>Bratislava<small>2011</small></b></button>
+        <button class="atlas__pin atlas__pin--home" type="button" data-city="bcn" style="left:29.6%;top:85%" data-title="Festival Internacional de Música de Cantonigròs" data-info="Vic, 2015 · rueda de prensa en el Palau de la Música"><i></i><b>Barcelona · Vic<small>Casa · Cantonigròs 2015</small></b></button>
+        <button class="atlas__pin" type="button" data-city="gales" style="left:8.7%;top:19.6%" data-title="International Golden Nightingale Choir Festival" data-info="Carmarthen, Gales · 2008 · su primera vez como jurado"><i></i><b>Carmarthen<small>Gales · 2008</small></b></button>
+        <button class="atlas__pin atlas__pin--left atlas__pin--big" type="button" data-city="cracovia" style="left:86.9%;top:30.9%" data-title="International Krakow Choir Festival · Cracovia Sacra" data-info="Cinco ediciones: 2010–2013 y 2019" data-photo="assets/img/cracovia-2012-twardowski.webp"><i></i><b>Cracovia<small>2010 – 2013 · 2019</small></b></button>
+        <button class="atlas__pin atlas__pin--left atlas__pin--big" type="button" data-city="varsovia" style="left:90.4%;top:17.3%" data-title="Varsovia Cantat · International Warsaw Choir Festival" data-info="Cuatro ediciones: 2014, 2016, 2018 y 2023" data-photo="assets/img/varsovia-2014-mesa.webp"><i></i><b>Varsovia<small>2014 · 2016 · 2018 · 2023</small></b></button>
+        <button class="atlas__pin atlas__pin--left" type="button" data-city="bratislava" style="left:77.8%;top:42.8%" data-title="3rd International Youth Music Festival" data-info="Bratislava, Eslovaquia · 2011"><i></i><b>Bratislava<small>2011</small></b></button>
       </div>
       <p class="caption atlas__origin">Origen: Cumaná (Venezuela) · «Venezuela será siempre mi cielo»</p>
       </div>
@@ -171,10 +186,10 @@
     </div>
     <p class="eyebrow reveal" style="margin-top:clamp(60px,8vw,100px)">En la mesa del jurado</p>
     <div class="grid grid--4" style="margin-top:22px">
-      <figure class="reveal" style="margin:0"><img src="assets/img/cracovia-2012-twardowski.webp" alt="Carmen Moreno sentada junto a Romuald Twardowski durante el Krakow Choir Festival" loading="lazy" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:6px" srcset="assets/img/cracovia-2012-twardowski--480.webp 480w, assets/img/cracovia-2012-twardowski--960.webp 960w, assets/img/cracovia-2012-twardowski--1600.webp 1600w, assets/img/cracovia-2012-twardowski.webp 2560w" sizes="(max-width: 560px) 100vw, (max-width: 1040px) 50vw, 25vw" width="2560" height="1920"><figcaption class="caption">Con el compositor Romuald Twardowski · Krakow Choir Festival, mayo-junio de 2012</figcaption></figure>
-      <figure class="reveal" style="margin:0;--d:1"><img src="assets/img/cracovia-2012-cartel.webp" alt="Carmen Moreno entre dos personas ante el cartel del International Krakow Choir Festival" loading="lazy" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:6px" srcset="assets/img/cracovia-2012-cartel--480.webp 480w, assets/img/cracovia-2012-cartel--960.webp 960w, assets/img/cracovia-2012-cartel--1600.webp 1600w, assets/img/cracovia-2012-cartel.webp 2560w" sizes="(max-width: 860px) 100vw, 50vw" width="2560" height="1920"><figcaption class="caption">International Krakow Choir Festival · 1-3 de junio de 2012</figcaption></figure>
-      <figure class="reveal" style="margin:0;--d:2"><img src="assets/img/cracovia-2013-omnes.webp" alt="Carmen Moreno con los integrantes de un coro infantil ganador en Cracovia" loading="lazy" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:6px" srcset="assets/img/cracovia-2013-omnes--480.webp 480w, assets/img/cracovia-2013-omnes--960.webp 960w, assets/img/cracovia-2013-omnes--1600.webp 1600w, assets/img/cracovia-2013-omnes.webp 2560w" sizes="(max-width: 860px) 100vw, 50vw" width="2560" height="1920"><figcaption class="caption">Cracovia 2013 · el coro OMNES (Letonia), ganador de la categoría D</figcaption></figure>
-      <figure class="reveal" style="margin:0;--d:3"><img src="assets/img/varsovia-2014-mesa.webp" alt="Carmen Moreno con otros dos miembros del jurado en la sala del festival de Varsovia" loading="lazy" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:6px" srcset="assets/img/varsovia-2014-mesa--480.webp 480w, assets/img/varsovia-2014-mesa--960.webp 960w, assets/img/varsovia-2014-mesa--1600.webp 1600w, assets/img/varsovia-2014-mesa.webp 2560w" sizes="(max-width: 860px) 100vw, 50vw" width="2560" height="1912"><figcaption class="caption">La mesa del jurado · Varsovia Cantat, 2014</figcaption></figure>
+      <figure class="reveal" data-city="cracovia" style="margin:0"><img src="assets/img/cracovia-2012-twardowski.webp" alt="Carmen Moreno sentada junto a Romuald Twardowski durante el Krakow Choir Festival" loading="lazy" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:6px" srcset="assets/img/cracovia-2012-twardowski--480.webp 480w, assets/img/cracovia-2012-twardowski--960.webp 960w, assets/img/cracovia-2012-twardowski--1600.webp 1600w, assets/img/cracovia-2012-twardowski.webp 2560w" sizes="(max-width: 560px) 100vw, (max-width: 1040px) 50vw, 25vw" width="2560" height="1920"><figcaption class="caption">Con el compositor Romuald Twardowski · Krakow Choir Festival, mayo-junio de 2012</figcaption></figure>
+      <figure class="reveal" data-city="cracovia" style="margin:0;--d:1"><img src="assets/img/cracovia-2012-cartel.webp" alt="Carmen Moreno entre dos personas ante el cartel del International Krakow Choir Festival" loading="lazy" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:6px" srcset="assets/img/cracovia-2012-cartel--480.webp 480w, assets/img/cracovia-2012-cartel--960.webp 960w, assets/img/cracovia-2012-cartel--1600.webp 1600w, assets/img/cracovia-2012-cartel.webp 2560w" sizes="(max-width: 860px) 100vw, 50vw" width="2560" height="1920"><figcaption class="caption">International Krakow Choir Festival · 1-3 de junio de 2012</figcaption></figure>
+      <figure class="reveal" data-city="cracovia" style="margin:0;--d:2"><img src="assets/img/cracovia-2013-omnes.webp" alt="Carmen Moreno con los integrantes de un coro infantil ganador en Cracovia" loading="lazy" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:6px" srcset="assets/img/cracovia-2013-omnes--480.webp 480w, assets/img/cracovia-2013-omnes--960.webp 960w, assets/img/cracovia-2013-omnes--1600.webp 1600w, assets/img/cracovia-2013-omnes.webp 2560w" sizes="(max-width: 860px) 100vw, 50vw" width="2560" height="1920"><figcaption class="caption">Cracovia 2013 · el coro OMNES (Letonia), ganador de la categoría D</figcaption></figure>
+      <figure class="reveal" data-city="varsovia" style="margin:0;--d:3"><img src="assets/img/varsovia-2014-mesa.webp" alt="Carmen Moreno con otros dos miembros del jurado en la sala del festival de Varsovia" loading="lazy" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:6px" srcset="assets/img/varsovia-2014-mesa--480.webp 480w, assets/img/varsovia-2014-mesa--960.webp 960w, assets/img/varsovia-2014-mesa--1600.webp 1600w, assets/img/varsovia-2014-mesa.webp 2560w" sizes="(max-width: 860px) 100vw, 50vw" width="2560" height="1912"><figcaption class="caption">La mesa del jurado · Varsovia Cantat, 2014</figcaption></figure>
     </div>
     <div class="quote-band" style="margin-top:clamp(70px,9vw,110px)">
       <blockquote class="quote reveal">La base del éxito de un coro no radica en las dificultades de las obras seleccionadas, sino en su técnica vocal.<cite>Carmen Moreno · jurado en Varsovia, 2016</cite></blockquote>
@@ -281,6 +296,7 @@
   <div class="wrap site-footer__base">
     <span>© 2026 Carmen Moreno Muñoz</span>
     <a href="fuentes.html">Fuentes y créditos</a>
+    <a href="cookies.html">Cookies</a>
     <a href="https://webmail.dondominio.com/" target="_blank" rel="noopener noreferrer nofollow">Acceso al correo</a>  </div>
 </footer>
 

@@ -21,46 +21,64 @@
       copied: 'Mensaje copiado', copyFail: 'No se pudo copiar: selecciona el texto manualmente', emailCopied: 'Correo copiado',
       opening: 'Abriendo tu correo con el mensaje preparado…', openingWa: 'Abriendo WhatsApp con el mensaje preparado…',
       agendaMore: n => `Ver todo el archivo (${n})`, menuOpen: 'Abrir menú', menuClose: 'Cerrar menú', videoDefault: 'Vídeo de Carmen Moreno',
+      vimeoTitle: 'Este vídeo se reproduce desde Vimeo', vimeoText: 'Al aceptar, se cargará el reproductor de Vimeo, un servicio de terceros que puede guardar cookies o información en tu dispositivo. Más información en la <a href="cookies.html">política de cookies</a>.', vimeoOk: 'Aceptar y ver el vídeo', vimeoNo: 'Ahora no',
       endSub: 'Soprano · Maestra de técnica vocal', endReplay: 'Volver a verlo', endBook: 'Reservar una clase',
       q: (n, t) => `Pregunta ${n} de ${t}`, back: '← Volver a la pregunta anterior', start: 'Tu punto de partida',
       format: m => `Formato recomendado: <strong>clases individuales ${m}</strong>.`,
       modes: { bcn: 'en Barcelona', online: 'online, desde donde estés', any: 'online o en Barcelona' },
+      modesMsg: { bcn: 'en Barcelona', online: 'online', any: 'online o en Barcelona' },
       modern: ' Como trabajas música moderna, Carmen adapta la exigencia de comisuras y apoyo al estilo, sin cambiar la base técnica.',
       request: 'Solicitar esta clase', see: 'Ver el programa', again: 'Repetir el test',
       mail: d => `Hola, Carmen:\n\nMe gustaría solicitar una clase de técnica vocal.\n\n` +
         `Programa: ${d.programa || 'Aún no lo sé, me gustaría tu consejo'}\nModalidad: ${d.modalidad || 'Online'}\nFormato: ${d.formato || 'Clase suelta'}\n` +
         `Días preferidos: ${d.dias || 'a convenir'}\nFranja: ${d.franja || 'Indiferente'}\nPaís / zona horaria: ${d.pais || '—'}\n\nSobre mí: ${d.mensaje || '—'}\n\n${d.firma}`,
       subject: p => `Solicitud de clase · ${p || 'Técnica vocal'}`,
+      quizIntro: 'Cuéntale a Carmen que quieres empezar. Solo necesitamos tu nombre: el mensaje saldrá desde tu WhatsApp o tu correo, con tus respuestas ya escritas.',
+      quizName: 'Tu nombre', quizNote: 'Algo que quieras contarle (opcional)', quizWa: 'Enviar por WhatsApp', quizMail: 'Enviar por correo',
+      quizPriv: 'La web no guarda tus datos: se abre tu WhatsApp o tu correo con el mensaje preparado, y solo se envía si tú pulsas «Enviar» allí.',
+      quizMsg: d => `Hola, Carmen:\n\nSoy ${d.nombre}. He hecho el test de tu web y me encaja: ${d.programa}.\n\nMis respuestas:\n${d.respuestas}\n\nQuiero clases ${d.modalidad}.\n\n${d.nota ? 'Quiero contarte: ' + d.nota + '\n\n' : ''}Me gustaría que me orientaras para empezar. ¡Gracias!\n${d.nombre}`,
     },
     en: {
       copied: 'Message copied', copyFail: 'Could not copy: please select the text manually', emailCopied: 'Email address copied',
       opening: 'Opening your email with the message ready…', openingWa: 'Opening WhatsApp with the message ready…',
       agendaMore: n => `See the full archive (${n})`, menuOpen: 'Open menu', menuClose: 'Close menu', videoDefault: 'Video by Carmen Moreno',
+      vimeoTitle: 'This video plays from Vimeo', vimeoText: 'If you accept, the Vimeo player will load. Vimeo is a third-party service that may store cookies or information on your device. More information in the <a href="cookies.html">cookie policy</a>.', vimeoOk: 'Accept and watch the video', vimeoNo: 'Not now',
       endSub: 'Soprano · Vocal technique teacher', endReplay: 'Watch again', endBook: 'Book a lesson',
       q: (n, t) => `Question ${n} of ${t}`, back: '← Back to the previous question', start: 'Your starting point',
       format: m => `Recommended format: <strong>one-to-one lessons ${m}</strong>.`,
       modes: { bcn: 'in Barcelona', online: 'online, wherever you are', any: 'online or in Barcelona' },
+      modesMsg: { bcn: 'in Barcelona', online: 'online', any: 'online or in Barcelona' },
       modern: ' As you sing contemporary music, Carmen adapts the work on lip corners and support to the style, without changing the technical foundation.',
       request: 'Request this lesson', see: 'See the programme', again: 'Take the test again',
       mail: d => `Hello Carmen,\n\nI would like to book a vocal technique lesson.\n\n` +
         `Programme: ${d.programa || 'I’m not sure yet, I’d like your advice'}\nMode: ${d.modalidad || 'Online'}\nFormat: ${d.formato || 'Single lesson'}\n` +
         `Preferred days: ${d.dias || 'to be agreed'}\nTime of day: ${d.franja || 'Any'}\nCountry / time zone: ${d.pais || '—'}\n\nAbout me: ${d.mensaje || '—'}\n\n${d.firma}`,
       subject: p => `Lesson request · ${p || 'Vocal technique'}`,
+      quizIntro: 'Let Carmen know you would like to start. We only need your name: the message will go out from your WhatsApp or your email, with your answers already written.',
+      quizName: 'Your name', quizNote: 'Anything you would like to tell her (optional)', quizWa: 'Send by WhatsApp', quizMail: 'Send by email',
+      quizPriv: 'This website does not store your data: your WhatsApp or your email opens with the message ready, and it is only sent if you press “Send” there.',
+      quizMsg: d => `Hello, Carmen:\n\nI am ${d.nombre}. I took the quiz on your website and it suggests: ${d.programa}.\n\nMy answers:\n${d.respuestas}\n\nI would like lessons ${d.modalidad}.\n\n${d.nota ? 'I would like to tell you: ' + d.nota + '\n\n' : ''}I would like your guidance to get started. Thank you!\n${d.nombre}`,
     },
     ca: {
       copied: 'Missatge copiat', copyFail: 'No s’ha pogut copiar: selecciona el text manualment', emailCopied: 'Correu copiat',
       opening: 'S’obre el teu correu amb el missatge preparat…', openingWa: 'S’obre WhatsApp amb el missatge preparat…',
       agendaMore: n => `Mostra tot l’arxiu (${n})`, menuOpen: 'Obre el menú', menuClose: 'Tanca el menú', videoDefault: 'Vídeo de Carmen Moreno',
+      vimeoTitle: 'Aquest vídeo es reprodueix des de Vimeo', vimeoText: 'En acceptar, es carregarà el reproductor de Vimeo, un servei de tercers que pot desar galetes o informació al vostre dispositiu. Més informació a la <a href="cookies.html">política de galetes</a>.', vimeoOk: 'Accepta i mira el vídeo', vimeoNo: 'Ara no',
       endSub: 'Soprano · Mestra de tècnica vocal', endReplay: 'Torna a veure’l', endBook: 'Reserva una classe',
       q: (n, t) => `Pregunta ${n} de ${t}`, back: '← Torna a la pregunta anterior', start: 'El teu punt de partida',
       format: m => `Format recomanat: <strong>classes individuals ${m}</strong>.`,
       modes: { bcn: 'a Barcelona', online: 'en línia, siguis on siguis', any: 'en línia o a Barcelona' },
+      modesMsg: { bcn: 'a Barcelona', online: 'en línia', any: 'en línia o a Barcelona' },
       modern: ' Com que treballes música moderna, la Carmen adapta l’exigència de comissures i suport a l’estil, sense canviar la base tècnica.',
       request: 'Sol·licita aquesta classe', see: 'Mira el programa', again: 'Repeteix el test',
       mail: d => `Hola, Carmen:\n\nM’agradaria sol·licitar una classe de tècnica vocal.\n\n` +
         `Programa: ${d.programa || 'Encara no ho sé, m’agradaria el teu consell'}\nModalitat: ${d.modalidad || 'En línia'}\nFormat: ${d.formato || 'Classe solta'}\n` +
         `Dies preferits: ${d.dias || 'a convenir'}\nFranja: ${d.franja || 'Indiferent'}\nPaís / zona horària: ${d.pais || '—'}\n\nSobre mi: ${d.mensaje || '—'}\n\n${d.firma}`,
       subject: p => `Sol·licitud de classe · ${p || 'Tècnica vocal'}`,
+      quizIntro: 'Explica a la Carmen que vols començar. Només necessitem el teu nom: el missatge sortirà des del teu WhatsApp o el teu correu, amb les teves respostes ja escrites.',
+      quizName: 'El teu nom', quizNote: 'Alguna cosa que li vulguis explicar (opcional)', quizWa: 'Envia per WhatsApp', quizMail: 'Envia per correu',
+      quizPriv: 'El web no desa les teves dades: s’obre el teu WhatsApp o el teu correu amb el missatge preparat, i només s’envia si tu prems «Envia» allà.',
+      quizMsg: d => `Hola, Carmen:\n\nSóc ${d.nombre}. He fet el test del teu web i m’encaixa: ${d.programa}.\n\nLes meves respostes:\n${d.respuestas}\n\nVull classes ${d.modalidad}.\n\n${d.nota ? 'Et vull explicar: ' + d.nota + '\n\n' : ''}M’agradaria que m’orientessis per començar. Gràcies!\n${d.nombre}`,
     },
   };
   const L = I18N[LANG] || I18N.es;
@@ -361,7 +379,21 @@
       const r = RESULTS[key];
       const mode = score.bcn ? L.modes.bcn : score.online ? L.modes.online : L.modes.any;
       const extra = score.mod ? L.modern : '';
-      body.innerHTML = `<div class="quiz__step quiz__result"><span class="quiz__count">${L.start}</span><h3>${r.t}</h3><p class="lead">${r.d}${extra}</p><p>${L.format(mode)}</p><div class="btn-row"><a class="btn" href="escuela-online.html?programa=${encodeURIComponent(r.t)}#reserva">${L.request}</a><a class="link-arrow" href="${r.href}">${L.see}</a></div><button type="button" class="quiz__back">${L.again}</button></div>`;
+      body.innerHTML = `<div class="quiz__step quiz__result"><span class="quiz__count">${L.start}</span><h3>${r.t}</h3><p class="lead">${r.d}${extra}</p><p>${L.format(mode)}</p><form class="quiz__form form" novalidate><p class="quiz__ask">${L.quizIntro}</p><div class="field"><label for="q-nombre">${L.quizName}</label><input id="q-nombre" name="nombre" required autocomplete="name"></div><div class="field"><label for="q-nota">${L.quizNote}</label><textarea id="q-nota" name="nota" rows="3"></textarea></div><div class="btn-row">${WA ? `<button class="btn btn--gold" type="button" data-quiz-wa>${L.quizWa}</button>` : ''}<button class="btn" type="button" data-quiz-mail>${L.quizMail}</button><a class="link-arrow" href="${r.href}">${L.see}</a></div><p class="small quiz__priv">${L.quizPriv}</p></form><button type="button" class="quiz__back">${L.again}</button></div>`;
+      const quizForm = $('.quiz__form', body);
+      const quizText = () => {
+        const d = new FormData(quizForm);
+        return L.quizMsg({ nombre: String(d.get('nombre') || '').trim(), programa: r.t, modalidad: L.modesMsg[score.bcn ? 'bcn' : score.online ? 'online' : 'any'],
+          respuestas: picks.map((pk, k) => `- ${QUIZ[k].q} ${pk[0]}`).join('\n'), nota: String(d.get('nota') || '').trim() });
+      };
+      $('[data-quiz-wa]', body)?.addEventListener('click', () => {
+        if (!quizForm.reportValidity()) return;
+        window.open(waLink(quizText()), '_blank', 'noopener'); toast(L.openingWa);
+      });
+      $('[data-quiz-mail]', body).addEventListener('click', () => {
+        if (!quizForm.reportValidity()) return;
+        location.href = `mailto:${EMAIL}?subject=${encodeURIComponent(L.subject(r.t))}&body=${encodeURIComponent(quizText())}`; toast(L.opening);
+      });
       $('.quiz__back', body).addEventListener('click', () => { step = 0; picks.length = 0; render(); });
       store.set('cm-programa', r.t);
     };
@@ -573,9 +605,17 @@
         card.addEventListener('mouseleave', () => { card.classList.remove('is-previewing'); v?.pause(); });
       }
     });
+    // Vimeo es un tercero que puede guardar cookies: no se carga hasta que la persona lo acepta.
+    // El consentimiento se recuerda solo mientras dure la pestaña (cm-vimeo, sessionStorage).
     $$('[data-vimeo]').forEach(b => b.addEventListener('click', () => {
       const id = b.dataset.vimeo.replace(/\D/g, '');
-      modal.open(`<iframe src="https://player.vimeo.com/video/${id}?autoplay=1&dnt=1" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="${escAttr(b.dataset.caption || L.videoDefault)}"></iframe><p class="modal__caption">${escAttr(b.dataset.caption || '')}</p>`, b);
+      const player = () => `<iframe src="https://player.vimeo.com/video/${id}?autoplay=1&dnt=1" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="${escAttr(b.dataset.caption || L.videoDefault)}"></iframe><p class="modal__caption">${escAttr(b.dataset.caption || '')}</p>`;
+      if (store.get('cm-vimeo')) { modal.open(player(), b); return; }
+      modal.open(`<div class="consent"><p class="consent__title">${L.vimeoTitle}</p><p>${L.vimeoText}</p><div class="btn-row"><button class="btn btn--gold" type="button" data-consent-ok>${L.vimeoOk}</button><button class="btn btn--ghost" type="button" data-consent-no>${L.vimeoNo}</button></div></div>`, b);
+      const body = $('.modal__body');
+      $('[data-consent-ok]', body)?.addEventListener('click', () => { store.set('cm-vimeo', '1'); body.innerHTML = player(); });
+      $('[data-consent-no]', body)?.addEventListener('click', () => modal.close());
+      $('[data-consent-ok]', body)?.focus();
     }));
     $$('.reel').forEach(reel => {
       const track = $('.reel__track', reel);
@@ -600,17 +640,60 @@
   function initAtlas() {
     const atlas = $('.atlas');
     if (!atlas) return;
+    const section = atlas.closest('section') || document;
     const pins = $$('.atlas__pin', atlas);
     const rows = $$('[data-city]', atlas).filter(e => e.tagName === 'LI');
+    const figs = $$('figure[data-city]', section);
     const set = c => {
       pins.forEach(p => p.classList.toggle('is-active', p.dataset.city === c));
       rows.forEach(r => r.classList.toggle('is-active', r.dataset.city === c));
+      figs.forEach(f => f.classList.toggle('is-lit', f.dataset.city === c));
     };
     [...pins, ...rows].forEach(el => {
       el.addEventListener('mouseenter', () => set(el.dataset.city));
       el.addEventListener('focus', () => set(el.dataset.city));
-      el.addEventListener('click', () => set(el.dataset.city));
     });
+    rows.forEach(r => r.addEventListener('click', () => set(r.dataset.city)));
+
+    /* Mini-ficha al pulsar un pin */
+    const map = $('.atlas__map', atlas);
+    const card = document.createElement('div');
+    card.className = 'atlas__card';
+    card.hidden = true;
+    map.appendChild(card);
+    let open = null;
+    const close = () => { card.hidden = true; open = null; };
+    pins.forEach(p => p.addEventListener('click', e => {
+      e.stopPropagation();
+      set(p.dataset.city);
+      if (open === p) return close();
+      open = p;
+      card.innerHTML = (p.dataset.photo ? '<img src="' + p.dataset.photo + '" alt="">' : '') +
+        '<b>' + (p.dataset.title || '') + '</b><small>' + (p.dataset.info || '') + '</small>';
+      card.hidden = false;
+    }));
+    map.addEventListener('click', e => { if (!e.target.closest('.atlas__pin')) close(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+
+    /* Contador que cuenta al aparecer */
+    const nums = $$('.atlas__stats b', atlas);
+    if (nums.length && !reduced && 'IntersectionObserver' in window) {
+      const io = new IntersectionObserver(ents => {
+        if (!ents.some(en => en.isIntersecting)) return;
+        io.disconnect();
+        nums.forEach(b => {
+          const end = +b.dataset.n || 0;
+          const t0 = performance.now();
+          const tick = now => {
+            const k = Math.min(1, (now - t0) / 900);
+            b.textContent = Math.round(end * (1 - Math.pow(1 - k, 3)));
+            if (k < 1) requestAnimationFrame(tick);
+          };
+          requestAnimationFrame(tick);
+        });
+      }, { threshold: .4 });
+      io.observe(atlas);
+    }
   }
 
   /* ---------- Reserva en pasos ---------- */
