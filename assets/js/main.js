@@ -215,9 +215,11 @@
     const show = n => {
       i = (n + slides.length) % slides.length;
       slides.forEach((s, k) => s.classList.toggle('is-active', k === i));
+      // Varias diapositivas pueden compartir faceta (data-rail): se ilumina el botón de esa faceta
+      const ri = slides[i].dataset.rail !== undefined ? +slides[i].dataset.rail : i;
       rail.forEach((b, k) => {
-        b.classList.toggle('is-active', k === i);
-        b.setAttribute('aria-pressed', k === i);
+        b.classList.toggle('is-active', k === ri);
+        b.setAttribute('aria-pressed', k === ri);
         const bar = $('i', b);
         if (bar) { bar.style.animation = 'none'; void bar.offsetWidth; bar.style.animation = ''; }
       });
@@ -227,7 +229,7 @@
       if (next && next.loading === 'lazy') next.loading = 'eager';
     };
     const play = () => { clearInterval(timer); if (!reduced) timer = setInterval(() => show(i + 1), DUR); };
-    rail.forEach((b, k) => { b.style.setProperty('--dur', DUR + 'ms'); b.addEventListener('click', () => { show(k); play(); }); });
+    rail.forEach((b, k) => { b.style.setProperty('--dur', DUR + 'ms'); b.addEventListener('click', () => { const f = slides.findIndex(s => s.dataset.rail !== undefined && +s.dataset.rail === k); show(f >= 0 ? f : k); play(); }); });
     document.addEventListener('visibilitychange', () => document.hidden ? clearInterval(timer) : play());
     show(0); play();
   }
