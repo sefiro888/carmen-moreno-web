@@ -35,6 +35,7 @@
       subject: p => `Solicitud de clase · ${p || 'Técnica vocal'}`,
       quizIntro: 'Cuéntale a Carmen que quieres empezar. Solo necesitamos tu nombre: el mensaje saldrá desde tu WhatsApp o tu correo, con tus respuestas ya escritas.',
       quizName: 'Tu nombre', quizNote: 'Algo que quieras contarle (opcional)', quizWa: 'Enviar por WhatsApp', quizMail: 'Enviar por correo',
+      quizMailLabel: 'O envíalo por correo:', quizMailApp: 'Mi app de correo', quizCopy: 'Copiar el mensaje',
       quizPriv: 'La web no guarda tus datos: se abre tu WhatsApp o tu correo con el mensaje preparado, y solo se envía si tú pulsas «Enviar» allí.',
       quizMsg: d => `Hola, Carmen:\n\nSoy ${d.nombre}. He hecho el test de tu web y me encaja: ${d.programa}.\n\nMis respuestas:\n${d.respuestas}\n\nQuiero clases ${d.modalidad}.\n\n${d.nota ? 'Quiero contarte: ' + d.nota + '\n\n' : ''}Me gustaría que me orientaras para empezar. ¡Gracias!\n${d.nombre}`,
     },
@@ -56,6 +57,7 @@
       subject: p => `Lesson request · ${p || 'Vocal technique'}`,
       quizIntro: 'Let Carmen know you would like to start. We only need your name: the message will go out from your WhatsApp or your email, with your answers already written.',
       quizName: 'Your name', quizNote: 'Anything you would like to tell her (optional)', quizWa: 'Send by WhatsApp', quizMail: 'Send by email',
+      quizMailLabel: 'Or send it by email:', quizMailApp: 'My email app', quizCopy: 'Copy the message',
       quizPriv: 'This website does not store your data: your WhatsApp or your email opens with the message ready, and it is only sent if you press “Send” there.',
       quizMsg: d => `Hello, Carmen:\n\nI am ${d.nombre}. I took the quiz on your website and it suggests: ${d.programa}.\n\nMy answers:\n${d.respuestas}\n\nI would like lessons ${d.modalidad}.\n\n${d.nota ? 'I would like to tell you: ' + d.nota + '\n\n' : ''}I would like your guidance to get started. Thank you!\n${d.nombre}`,
     },
@@ -77,12 +79,20 @@
       subject: p => `Sol·licitud de classe · ${p || 'Tècnica vocal'}`,
       quizIntro: 'Explica a la Carmen que vols començar. Només necessitem el teu nom: el missatge sortirà des del teu WhatsApp o el teu correu, amb les teves respostes ja escrites.',
       quizName: 'El teu nom', quizNote: 'Alguna cosa que li vulguis explicar (opcional)', quizWa: 'Envia per WhatsApp', quizMail: 'Envia per correu',
+      quizMailLabel: 'O envia-ho per correu:', quizMailApp: 'La meva app de correu', quizCopy: 'Copia el missatge',
       quizPriv: 'El web no desa les teves dades: s’obre el teu WhatsApp o el teu correu amb el missatge preparat, i només s’envia si tu prems «Envia» allà.',
       quizMsg: d => `Hola, Carmen:\n\nSóc ${d.nombre}. He fet el test del teu web i m’encaixa: ${d.programa}.\n\nLes meves respostes:\n${d.respuestas}\n\nVull classes ${d.modalidad}.\n\n${d.nota ? 'Et vull explicar: ' + d.nota + '\n\n' : ''}M’agradaria que m’orientessis per començar. Gràcies!\n${d.nombre}`,
     },
   };
   const L = I18N[LANG] || I18N.es;
   const waLink = text => `https://wa.me/${WA}?text=${encodeURIComponent(text)}`;
+  // Correo en el navegador (Gmail u Outlook web), con destinatario, asunto y mensaje ya escritos
+  const webmailLink = (kind, subject, body) => {
+    const to = encodeURIComponent(EMAIL), su = encodeURIComponent(subject), bo = encodeURIComponent(body);
+    return kind === 'gmail'
+      ? `https://mail.google.com/mail/?view=cm&fs=1&to=${to}&su=${su}&body=${bo}`
+      : `https://outlook.live.com/mail/0/deeplink/compose?to=${to}&subject=${su}&body=${bo}`;
+  };
 
   function toast(msg) {
     const t = $('.toast');
@@ -379,7 +389,7 @@
       const r = RESULTS[key];
       const mode = score.bcn ? L.modes.bcn : score.online ? L.modes.online : L.modes.any;
       const extra = score.mod ? L.modern : '';
-      body.innerHTML = `<div class="quiz__step quiz__result"><span class="quiz__count">${L.start}</span><h3>${r.t}</h3><p class="lead">${r.d}${extra}</p><p>${L.format(mode)}</p><form class="quiz__form form" novalidate><p class="quiz__ask">${L.quizIntro}</p><div class="field"><label for="q-nombre">${L.quizName}</label><input id="q-nombre" name="nombre" required autocomplete="name"></div><div class="field"><label for="q-nota">${L.quizNote}</label><textarea id="q-nota" name="nota" rows="3"></textarea></div><div class="btn-row">${WA ? `<button class="btn btn--gold" type="button" data-quiz-wa>${L.quizWa}</button>` : ''}<button class="btn" type="button" data-quiz-mail>${L.quizMail}</button><a class="link-arrow" href="${r.href}">${L.see}</a></div><p class="small quiz__priv">${L.quizPriv}</p></form><button type="button" class="quiz__back">${L.again}</button></div>`;
+      body.innerHTML = `<div class="quiz__step quiz__result"><span class="quiz__count">${L.start}</span><h3>${r.t}</h3><p class="lead">${r.d}${extra}</p><p>${L.format(mode)}</p><form class="quiz__form form" novalidate><p class="quiz__ask">${L.quizIntro}</p><div class="field"><label for="q-nombre">${L.quizName}</label><input id="q-nombre" name="nombre" required autocomplete="name"></div><div class="field"><label for="q-nota">${L.quizNote}</label><textarea id="q-nota" name="nota" rows="3"></textarea></div><div class="btn-row">${WA ? `<button class="btn btn--gold" type="button" data-quiz-wa>${L.quizWa}</button>` : ''}</div><div class="quiz__mail"><span>${L.quizMailLabel}</span><button class="btn btn--ghost" type="button" data-quiz-gmail>Gmail</button><button class="btn btn--ghost" type="button" data-quiz-outlook>Outlook</button><button class="btn btn--ghost" type="button" data-quiz-mail>${L.quizMailApp}</button></div><div class="btn-row"><button type="button" class="link-arrow" data-quiz-copy>${L.quizCopy}</button><a class="link-arrow" href="${r.href}">${L.see}</a></div><p class="small quiz__priv">${L.quizPriv}</p></form><button type="button" class="quiz__back">${L.again}</button></div>`;
       const quizForm = $('.quiz__form', body);
       const quizText = () => {
         const d = new FormData(quizForm);
@@ -390,9 +400,22 @@
         if (!quizForm.reportValidity()) return;
         window.open(waLink(quizText()), '_blank', 'noopener'); toast(L.openingWa);
       });
+      const mailParts = () => ({ su: encodeURIComponent(L.subject(r.t)), bo: encodeURIComponent(quizText()), to: encodeURIComponent(EMAIL) });
       $('[data-quiz-mail]', body).addEventListener('click', () => {
         if (!quizForm.reportValidity()) return;
-        location.href = `mailto:${EMAIL}?subject=${encodeURIComponent(L.subject(r.t))}&body=${encodeURIComponent(quizText())}`; toast(L.opening);
+        const m = mailParts(); location.href = `mailto:${EMAIL}?subject=${m.su}&body=${m.bo}`; toast(L.opening);
+      });
+      $('[data-quiz-gmail]', body).addEventListener('click', () => {
+        if (!quizForm.reportValidity()) return;
+        const m = mailParts(); window.open(`https://mail.google.com/mail/?view=cm&fs=1&to=${m.to}&su=${m.su}&body=${m.bo}`, '_blank', 'noopener');
+      });
+      $('[data-quiz-outlook]', body).addEventListener('click', () => {
+        if (!quizForm.reportValidity()) return;
+        const m = mailParts(); window.open(`https://outlook.live.com/mail/0/deeplink/compose?to=${m.to}&subject=${m.su}&body=${m.bo}`, '_blank', 'noopener');
+      });
+      $('[data-quiz-copy]', body).addEventListener('click', () => {
+        if (!quizForm.reportValidity()) return;
+        copy(quizText());
       });
       $('.quiz__back', body).addEventListener('click', () => { step = 0; picks.length = 0; render(); });
       store.set('cm-programa', r.t);
@@ -717,6 +740,8 @@
     }
 
     const waBtn = $('[data-wa-send]', form);
+    const gmBtn = $('[data-gmail-send]', form);
+    const olBtn = $('[data-outlook-send]', form);
     const message = () => {
       const d = new FormData(form);
       return L.mail({
@@ -733,6 +758,8 @@
       next.hidden = n === panels.length - 1;
       send.hidden = copyBtn.hidden = n !== panels.length - 1;
       if (waBtn) waBtn.hidden = !WA || n !== panels.length - 1;
+      if (gmBtn) gmBtn.hidden = n !== panels.length - 1;
+      if (olBtn) olBtn.hidden = n !== panels.length - 1;
       if (n === panels.length - 1) summary.textContent = message();
       const first = $('input, select, textarea', panels[n]);
       if (n && first) first.focus({ preventScroll: true });
@@ -745,6 +772,10 @@
     next.addEventListener('click', () => { if (valid()) show(step + 1); });
     prev.addEventListener('click', () => show(step - 1));
     copyBtn.addEventListener('click', () => copy(message()));
+    [['gmail', gmBtn], ['outlook', olBtn]].forEach(([kind, btn]) => btn?.addEventListener('click', () => {
+      if (!form.reportValidity()) return;
+      window.open(webmailLink(kind, L.subject(new FormData(form).get('programa')), message()), '_blank', 'noopener');
+    }));
     waBtn?.addEventListener('click', () => {
       if (!form.reportValidity()) return;
       window.open(waLink(message()), '_blank', 'noopener');
@@ -769,6 +800,11 @@
       location.href = `mailto:${EMAIL}?subject=${encodeURIComponent(d.get('motivo') + ' · ' + d.get('nombre'))}&body=${encodeURIComponent(body)}`;
       toast(L.opening);
     });
+    [['gmail', '[data-gmail-contact]'], ['outlook', '[data-outlook-contact]']].forEach(([kind, sel]) => $(sel, form)?.addEventListener('click', () => {
+      if (!form.reportValidity()) return;
+      const d = new FormData(form);
+      window.open(webmailLink(kind, d.get('motivo') + ' · ' + d.get('nombre'), `${d.get('mensaje')}\n\n${d.get('nombre')}\n${d.get('correo')}`), '_blank', 'noopener');
+    }));
     $('[data-wa-contact]', form)?.addEventListener('click', () => {
       if (!form.reportValidity()) return;
       const d = new FormData(form);

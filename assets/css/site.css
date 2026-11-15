@@ -1244,3 +1244,9 @@ html { -webkit-tap-highlight-color: transparent; }
 .atlas__card small { display: block; margin-top: 4px; font-size: .74rem; line-height: 1.45; color: rgba(243, 233, 218, .68); }
 #jurado figure[data-city] img { transition: outline-color .3s; outline: 2px solid transparent; outline-offset: 3px; }
 #jurado figure.is-lit img { outline-color: var(--gold-light); }
+
+/* Test: opciones de correo en el navegador (Gmail, Outlook) además de la app del sistema (15/11/2026) */
+.quiz__mail { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 16px; }
+.quiz__mail > span { font-size: .92rem; color: var(--ink-2); margin-right: 4px; }
+.quiz__mail .btn { min-height: 44px; padding: 10px 20px; }
+.quiz__form button.link-arrow { background: none; border: 0; padding: 0; cursor: pointer; font: inherit; }
