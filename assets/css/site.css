@@ -1215,3 +1215,7 @@ html { -webkit-tap-highlight-color: transparent; }
 .vend__actions { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
 .vend__actions .btn--ghost { color: var(--gold-pale); }
 @media (prefers-reduced-motion: reduce) { .vend__curtain, .vend__content { transition: none !important; } }
+
+/* Portada: foto del recital con arpa volteada para que Carmen quede a la derecha y la arpista a la izquierda (15/11/2026) */
+.hero__slide--flip { transform: scaleX(-1); }
+@media (max-width: 760px) { .hero__slide--flip img { object-position: 0% 20% !important; } }

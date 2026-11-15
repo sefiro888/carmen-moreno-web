@@ -236,10 +236,10 @@
   // Los títulos de RESULTS deben coincidir con los valores de «programa» del formulario de reserva de cada idioma
   const QUIZ_EN = [
     { q: 'What is your relationship with singing right now?', o: [
-      ['I want to start and have no vocal training', { ini: 3 }],
-      ['I sing in a choir', { cor: 3 }],
-      ['I study singing or perform as a soloist', { pro: 3 }],
-      ['I use my voice for work (teaching, broadcasting…)', { voz: 3 }],
+      ['Professional', { pro: 3 }],
+      ['Choir member', { cor: 3 }],
+      ['Singing student', { ini: 3 }],
+      ['Other', { voz: 3 }],
     ] },
     { q: 'What would you like to solve first?', o: [
       ['Breathing properly and not running out of air', { ini: 2, voz: 1 }],
@@ -268,10 +268,10 @@
   };
   const QUIZ_CA = [
     { q: 'Quina és la teva relació amb el cant ara mateix?', o: [
-      ['Vull començar i no tinc formació vocal', { ini: 3 }],
-      ['Canto en una coral', { cor: 3 }],
-      ['Estudio cant o actuo com a solista', { pro: 3 }],
-      ['Faig servir la veu a la feina (docència, locució…)', { voz: 3 }],
+      ['Professional', { pro: 3 }],
+      ['Integrant d’una coral', { cor: 3 }],
+      ['Estudiant de cant', { ini: 3 }],
+      ['Altres', { voz: 3 }],
     ] },
     { q: 'Què t’agradaria resoldre primer?', o: [
       ['Respirar bé i que no em falti l’aire', { ini: 2, voz: 1 }],
@@ -300,10 +300,10 @@
   };
   const QUIZ_ES = [
     { q: '¿Cuál es tu relación con el canto ahora mismo?', o: [
-      ['Quiero empezar y no tengo formación vocal', { ini: 3 }],
-      ['Canto en un coro', { cor: 3 }],
-      ['Estudio canto o actúo como solista', { pro: 3 }],
-      ['Uso la voz en mi trabajo (docencia, locución…)', { voz: 3 }],
+      ['Profesional', { pro: 3 }],
+      ['Integrante de un coro', { cor: 3 }],
+      ['Estudiante de canto', { ini: 3 }],
+      ['Otros', { voz: 3 }],
     ] },
     { q: '¿Qué te gustaría resolver primero?', o: [
       ['Respirar bien y que no me falte el aire', { ini: 2, voz: 1 }],
