@@ -280,7 +280,7 @@
     { q: 'What repertoire do you work on?', o: [
       ['None yet: I want to learn the basics', { ini: 2 }],
       ['Choral works we rehearse in the group', { cor: 2 }],
-      ['Opera, oratorio, lied or art song', { pro: 2 }],
+      ['Opera, oratorio, lied or light song', { pro: 2 }],
       ['Other', { ini: 1 }],
     ] },
     { q: 'How would you like to take your lessons?', o: [
@@ -312,7 +312,7 @@
     { q: 'Amb quin repertori treballes?', o: [
       ['Encara cap: vull aprendre les bases', { ini: 2 }],
       ['Obres corals que assagem amb el grup', { cor: 2 }],
-      ['Òpera, oratori, lied o cançó lírica', { pro: 2 }],
+      ['Òpera, oratori, lied o cançó lleugera', { pro: 2 }],
       ['Altres', { ini: 1 }],
     ] },
     { q: 'Com t’agradaria rebre les classes?', o: [
@@ -344,7 +344,7 @@
     { q: '¿Con qué repertorio trabajas?', o: [
       ['Todavía ninguno: quiero aprender las bases', { ini: 2 }],
       ['Obras corales que ensayamos en el grupo', { cor: 2 }],
-      ['Ópera, oratorio, lied o canción lírica', { pro: 2 }],
+      ['Ópera, oratorio, lied o canción ligera', { pro: 2 }],
       ['Otras', { ini: 1 }],
     ] },
     { q: '¿Cómo te gustaría recibir las clases?', o: [
