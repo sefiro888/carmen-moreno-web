@@ -33,7 +33,7 @@
         `Programa: ${d.programa || 'Aún no lo sé, me gustaría tu consejo'}\nModalidad: ${d.modalidad || 'Online'}\nFormato: ${d.formato || 'Clase suelta'}\n` +
         `Días preferidos: ${d.dias || 'a convenir'}\nFranja: ${d.franja || 'Indiferente'}\nPaís / zona horaria: ${d.pais || '—'}\n\nSobre mí: ${d.mensaje || '—'}\n\n${d.firma}`,
       subject: p => `Solicitud de clase · ${p || 'Técnica vocal'}`,
-      quizIntro: 'Cuéntale a Carmen que quieres empezar. Solo necesitamos tu nombre: el mensaje saldrá desde tu WhatsApp o tu correo, con tus respuestas ya escritas.',
+      quizIntro: 'Rellena el siguiente cuadro y expones tu interés particular. Tu nombre y el mensaje que saldrá desde tu WhatsApp o tu correo. Recuerda dar a ENVIAR.',
       quizName: 'Tu nombre', quizNote: 'Algo que quieras contarle (opcional)', quizWa: 'Enviar por WhatsApp', quizMail: 'Enviar por correo',
       quizMailLabel: 'O envíalo por correo:', quizMailApp: 'Mi app de correo', quizCopy: 'Copiar el mensaje',
       quizPriv: 'La web no guarda tus datos: se abre tu WhatsApp o tu correo con el mensaje preparado, y solo se envía si tú pulsas «Enviar» allí.',
@@ -55,7 +55,7 @@
         `Programme: ${d.programa || 'I’m not sure yet, I’d like your advice'}\nMode: ${d.modalidad || 'Online'}\nFormat: ${d.formato || 'Single lesson'}\n` +
         `Preferred days: ${d.dias || 'to be agreed'}\nTime of day: ${d.franja || 'Any'}\nCountry / time zone: ${d.pais || '—'}\n\nAbout me: ${d.mensaje || '—'}\n\n${d.firma}`,
       subject: p => `Lesson request · ${p || 'Vocal technique'}`,
-      quizIntro: 'Let Carmen know you would like to start. We only need your name: the message will go out from your WhatsApp or your email, with your answers already written.',
+      quizIntro: 'Fill in the box below and tell us your particular interest. Your name and the message will go out from your WhatsApp or your email. Remember to press SEND.',
       quizName: 'Your name', quizNote: 'Anything you would like to tell her (optional)', quizWa: 'Send by WhatsApp', quizMail: 'Send by email',
       quizMailLabel: 'Or send it by email:', quizMailApp: 'My email app', quizCopy: 'Copy the message',
       quizPriv: 'This website does not store your data: your WhatsApp or your email opens with the message ready, and it is only sent if you press “Send” there.',
@@ -77,7 +77,7 @@
         `Programa: ${d.programa || 'Encara no ho sé, m’agradaria el teu consell'}\nModalitat: ${d.modalidad || 'En línia'}\nFormat: ${d.formato || 'Classe solta'}\n` +
         `Dies preferits: ${d.dias || 'a convenir'}\nFranja: ${d.franja || 'Indiferent'}\nPaís / zona horària: ${d.pais || '—'}\n\nSobre mi: ${d.mensaje || '—'}\n\n${d.firma}`,
       subject: p => `Sol·licitud de classe · ${p || 'Tècnica vocal'}`,
-      quizIntro: 'Explica a la Carmen que vols començar. Només necessitem el teu nom: el missatge sortirà des del teu WhatsApp o el teu correu, amb les teves respostes ja escrites.',
+      quizIntro: 'Omple el quadre següent i exposa el teu interès particular. El teu nom i el missatge que sortirà des del teu WhatsApp o el teu correu. Recorda donar a ENVIA.',
       quizName: 'El teu nom', quizNote: 'Alguna cosa que li vulguis explicar (opcional)', quizWa: 'Envia per WhatsApp', quizMail: 'Envia per correu',
       quizMailLabel: 'O envia-ho per correu:', quizMailApp: 'La meva app de correu', quizCopy: 'Copia el missatge',
       quizPriv: 'El web no desa les teves dades: s’obre el teu WhatsApp o el teu correu amb el missatge preparat, i només s’envia si tu prems «Envia» allà.',
@@ -281,7 +281,7 @@
       ['None yet: I want to learn the basics', { ini: 2 }],
       ['Choral works we rehearse in the group', { cor: 2 }],
       ['Opera, oratorio, lied or art song', { pro: 2 }],
-      ['Pop or contemporary music', { pro: 1, ini: 1, mod: 2 }],
+      ['Other', { ini: 1 }],
     ] },
     { q: 'How would you like to take your lessons?', o: [
       ['Online, from home', { online: 1 }],
@@ -313,7 +313,7 @@
       ['Encara cap: vull aprendre les bases', { ini: 2 }],
       ['Obres corals que assagem amb el grup', { cor: 2 }],
       ['Òpera, oratori, lied o cançó lírica', { pro: 2 }],
-      ['Música moderna o melòdica', { pro: 1, ini: 1, mod: 2 }],
+      ['Altres', { ini: 1 }],
     ] },
     { q: 'Com t’agradaria rebre les classes?', o: [
       ['En línia, des de casa', { online: 1 }],
@@ -345,7 +345,7 @@
       ['Todavía ninguno: quiero aprender las bases', { ini: 2 }],
       ['Obras corales que ensayamos en el grupo', { cor: 2 }],
       ['Ópera, oratorio, lied o canción lírica', { pro: 2 }],
-      ['Música moderna o melódica', { pro: 1, ini: 1, mod: 2 }],
+      ['Otras', { ini: 1 }],
     ] },
     { q: '¿Cómo te gustaría recibir las clases?', o: [
       ['Online, desde casa', { online: 1 }],
