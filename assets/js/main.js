@@ -912,6 +912,75 @@
     });
   }
 
+  /* ---------- Carrusel de fotos ---------- */
+  function initPhotoCarousel() {
+    $$('[data-carousel]').forEach(car => {
+      const track = $('.pcar__track', car);
+      const slides = $$('figure', track);
+      const dots = $('.pcar__dots', car);
+      if (!track || !slides.length) return;
+      const smooth = reduced ? 'auto' : 'smooth';
+      if (dots) slides.forEach((s, i) => {
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.setAttribute('aria-label', (i + 1) + ' / ' + slides.length);
+        b.addEventListener('click', () => track.scrollTo({ left: s.offsetLeft - (track.clientWidth - s.offsetWidth) / 2, behavior: smooth }));
+        dots.appendChild(b);
+      });
+      const sync = () => {
+        if (!dots) return;
+        const x = track.scrollLeft + track.clientWidth / 2;
+        let k = 0;
+        slides.forEach((s, i) => { if (Math.abs(s.offsetLeft + s.offsetWidth / 2 - x) < Math.abs(slides[k].offsetLeft + slides[k].offsetWidth / 2 - x)) k = i; });
+        [...dots.children].forEach((d, i) => d.classList.toggle('is-on', i === k));
+      };
+      track.addEventListener('scroll', () => requestAnimationFrame(sync), { passive: true });
+      sync();
+      $$('.pcar__nav button', car).forEach(b => b.addEventListener('click', () =>
+        track.scrollBy({ left: (+b.dataset.dir) * (slides[0].offsetWidth + 18), behavior: smooth })));
+    });
+  }
+
+  /* ---------- WhatsApp con mensaje según la página ---------- */
+  function initWaMessages() {
+    const lang = (document.documentElement.lang || 'es').slice(0, 2);
+    const page = (location.pathname.split('/').pop() || 'index.html').replace('.html', '') || 'index';
+    const M = {
+      es: {
+        clases: 'Hola, Carmen. Me gustaría información sobre tus clases.',
+        libro: 'Hola, Carmen. Me interesa tu libro «Mi técnica vocal paso a paso».',
+        coros: 'Hola, Carmen. Me interesa tu asistencia técnica vocal para coros.',
+        agenda: 'Hola, Carmen. ¿Me avisas de tus próximas actuaciones?',
+        metodo: 'Hola, Carmen. He visto tu método en la web y quiero saber más.',
+      },
+      en: {
+        clases: 'Hello Carmen, I would like some information about your lessons.',
+        libro: 'Hello Carmen, I am interested in your book "Mi técnica vocal paso a paso".',
+        coros: 'Hello Carmen, I am interested in your vocal coaching for choirs.',
+        agenda: 'Hello Carmen, could you let me know about your upcoming performances?',
+        metodo: 'Hello Carmen, I saw your method on the website and would like to know more.',
+      },
+      ca: {
+        clases: 'Hola, Carmen. M’agradaria informació sobre les teves classes.',
+        libro: 'Hola, Carmen. M’interessa el teu llibre «Mi técnica vocal paso a paso».',
+        coros: 'Hola, Carmen. M’interessa la teva assistència tècnica vocal per a corals.',
+        agenda: 'Hola, Carmen. M’avises de les teves properes actuacions?',
+        metodo: 'Hola, Carmen. He vist el teu mètode al web i vull saber-ne més.',
+      },
+    };
+    const alias = { 'escuela-online': 'clases', aula: 'clases', academia: 'metodo', videos: 'metodo', podcast: 'metodo' };
+    const d = M[lang] || M.es;
+    const msg = d[alias[page] || page];
+    if (!msg) return;
+    $$('a[href*="wa.me/"]').forEach(a => {
+      try {
+        const u = new URL(a.href);
+        u.searchParams.set('text', msg);
+        a.href = u.toString();
+      } catch (e) { /* dirección rara: se deja como está */ }
+    });
+  }
+
   document.addEventListener('DOMContentLoaded', () => {
     initIntro();
     initHeader();
@@ -935,5 +1004,7 @@
     initPodcast();
     initStudio();
     initAula();
+    initPhotoCarousel();
+    initWaMessages();
   });
 })();
