@@ -1257,3 +1257,41 @@ html { -webkit-tap-highlight-color: transparent; }
 .quiz__mail > span { font-size: .92rem; color: var(--ink-2); margin-right: 4px; }
 .quiz__mail .btn { min-height: 44px; padding: 10px 20px; }
 .quiz__form button.link-arrow { background: none; border: 0; padding: 0; cursor: pointer; font: inherit; }
+
+/* Redes sociales: tarjetas con brillo del color de cada red, y iconos del pie (16/11/2026) */
+.redes { position: relative; overflow: hidden; }
+.redes::before { content: ""; position: absolute; inset: 0; pointer-events: none; background:
+  radial-gradient(520px 320px at 12% 60%, rgba(214, 41, 118, .22), transparent 70%),
+  radial-gradient(520px 320px at 50% 100%, rgba(24, 119, 242, .20), transparent 70%),
+  radial-gradient(520px 320px at 88% 60%, rgba(255, 87, 34, .22), transparent 70%); }
+.redes .wrap { position: relative; }
+.redes__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 26px; margin-top: 14px; }
+.red { position: relative; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 6px; padding: 38px 26px 30px; border-radius: 20px; color: #fff; text-decoration: none; overflow: hidden;
+  background: linear-gradient(160deg, rgba(255, 255, 255, .10), rgba(255, 255, 255, .03)); border: 1px solid rgba(255, 255, 255, .16); backdrop-filter: blur(4px);
+  transition: transform .45s var(--ease), box-shadow .45s var(--ease), border-color .45s; }
+.red::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 4px; background: var(--rbg); }
+.red::after { content: ""; position: absolute; width: 220px; height: 220px; left: 50%; top: -70px; transform: translateX(-50%); border-radius: 50%; background: var(--rc); opacity: .22; filter: blur(46px); transition: opacity .45s; pointer-events: none; }
+.red:hover, .red:focus-visible { transform: translateY(-8px); border-color: var(--rc); box-shadow: 0 26px 50px -22px var(--rc); }
+.red:hover::after, .red:focus-visible::after { opacity: .42; }
+.red__ico { position: relative; z-index: 1; width: 84px; height: 84px; border-radius: 24px; display: grid; place-items: center; background: var(--rbg); margin-bottom: 10px;
+  box-shadow: 0 14px 28px -10px var(--rc), inset 0 1px 0 rgba(255, 255, 255, .35); transition: transform .45s var(--ease); }
+.red:hover .red__ico { transform: rotate(-7deg) scale(1.08); }
+.red__ico svg { width: 44px; height: 44px; }
+.red__txt { position: relative; z-index: 1; display: grid; gap: 4px; }
+.red__txt strong { font: 500 1.75rem var(--serif); letter-spacing: .01em; }
+.red__txt small { font-size: .95rem; color: rgba(243, 233, 218, .75); overflow-wrap: anywhere; }
+.red__go { position: relative; z-index: 1; margin-top: 18px; display: inline-flex; align-items: center; gap: 10px; padding: 11px 20px; border-radius: 999px; background: var(--rbg); color: #fff; font-size: .78rem; font-weight: 800; letter-spacing: .09em; text-transform: uppercase; box-shadow: 0 10px 22px -10px var(--rc); }
+.red__go i { font-style: normal; transition: transform .3s var(--ease); }
+.red:hover .red__go i { transform: translateX(5px); }
+.red--ig { --rc: #E1306C; --rbg: linear-gradient(45deg, #FEDA75 0%, #FA7E1E 28%, #D62976 55%, #962FBF 78%, #4F5BD5 100%); }
+.red--fb { --rc: #3B8BFF; --rbg: linear-gradient(160deg, #3B8BFF, #1259C8); }
+.red--bl { --rc: #FF6B35; --rbg: linear-gradient(160deg, #FF8A3D, #F2490C); }
+.site-footer__social { display: flex; gap: 10px; margin-top: 16px; }
+.soc { width: 38px; height: 38px; border-radius: 11px; display: grid; place-items: center; transition: transform .3s var(--ease), box-shadow .3s; }
+.soc svg { width: 20px; height: 20px; }
+.soc:hover, .soc:focus-visible { transform: translateY(-3px) rotate(-5deg); box-shadow: 0 10px 20px -8px rgba(0, 0, 0, .6); }
+.soc--ig { background: linear-gradient(45deg, #FEDA75 0%, #FA7E1E 28%, #D62976 55%, #962FBF 78%, #4F5BD5 100%); }
+.soc--fb { background: #1877F2; }
+.soc--bl { background: #FF5722; }
+@media (max-width: 860px) { .redes__grid { grid-template-columns: minmax(0, 1fr); gap: 18px; } .red { padding: 30px 22px 26px; } }
+@media (prefers-reduced-motion: reduce) { .red, .red__ico, .soc, .red__go i { transition: none; } }
