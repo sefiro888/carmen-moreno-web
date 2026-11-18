@@ -275,7 +275,7 @@
       ['Breathing properly and not running out of air', { ini: 2, voz: 1 }],
       ['Staying in tune and holding my line in the choir', { cor: 2 }],
       ['High notes, leaps or a specific passage', { pro: 2 }],
-      ['Ending the day without fatigue or hoarseness', { voz: 3 }],
+      ['Other', { voz: 3 }],
     ] },
     { q: 'What repertoire do you work on?', o: [
       ['None yet: I want to learn the basics', { ini: 2 }],
@@ -307,7 +307,7 @@
       ['Respirar bé i que no em falti l’aire', { ini: 2, voz: 1 }],
       ['Afinar i sostenir la meva línia dins la coral', { cor: 2 }],
       ['Els aguts, els salts o un passatge concret', { pro: 2 }],
-      ['Acabar el dia sense cansament ni ronquera', { voz: 3 }],
+      ['Altres', { voz: 3 }],
     ] },
     { q: 'Amb quin repertori treballes?', o: [
       ['Encara cap: vull aprendre les bases', { ini: 2 }],
@@ -339,7 +339,7 @@
       ['Respirar bien y que no me falte el aire', { ini: 2, voz: 1 }],
       ['Afinar y sostener mi línea dentro del coro', { cor: 2 }],
       ['Los agudos, los saltos o un pasaje concreto', { pro: 2 }],
-      ['Terminar el día sin cansancio ni ronquera', { voz: 3 }],
+      ['Otro', { voz: 3 }],
     ] },
     { q: '¿Con qué repertorio trabajas?', o: [
       ['Todavía ninguno: quiero aprender las bases', { ini: 2 }],
