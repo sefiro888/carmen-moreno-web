@@ -920,43 +920,56 @@ h1 em, h2 em, h3 em { font-style: italic; color: var(--wine); }
 }
 
 /* ---------- Historia por capítulos (Cantoría Re-Quinto) ---------- */
-.chapters { list-style: none; margin: 0; padding: 0; display: grid; gap: clamp(64px, 9vw, 120px); }
-.chapter { display: grid; grid-template-columns: 1fr; gap: 28px; align-items: center; }
-.chapter__img { margin: 0; }
-.chapter__img img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--radius); box-shadow: var(--shadow); border: 1px solid var(--line-dark); }
-.chapter__img figcaption { margin-top: 10px; font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; opacity: .6; }
-.chapter__num { display: block; font-family: var(--sans); font-size: .72rem; letter-spacing: .24em; text-transform: uppercase; color: var(--gold-light); }
-.chapter__text h3 { font-family: var(--serif); font-weight: 500; font-size: clamp(1.9rem, 3.6vw, 2.8rem); line-height: 1.12; margin: .35em 0 .6em; }
-.chapter__text p { font-size: 1.04rem; line-height: 1.8; max-width: 58ch; opacity: .92; margin: 0 0 .9em; }
-.story { position: relative; isolation: isolate; }
-.story::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: radial-gradient(60% 40% at 85% 0%, rgba(220, 195, 143, .14), transparent 70%), radial-gradient(50% 35% at 0% 100%, rgba(109, 30, 45, .45), transparent 70%); }
-.chapters { position: relative; padding-left: 44px; }
-.chapters::before { content: ""; position: absolute; left: 6px; top: 0; bottom: 0; width: 1px; background: linear-gradient(var(--gold), rgba(180, 141, 76, .15)); }
-.chapter { position: relative; }
-.chapter::before { content: ""; position: absolute; left: -44px; top: .55em; width: 13px; height: 13px; border-radius: 50%; background: var(--gold-light); box-shadow: 0 0 0 5px rgba(180, 141, 76, .18), 0 0 22px rgba(220, 195, 143, .55); }
-.chapter__img img { transition: transform 1.4s var(--ease), filter 1.4s var(--ease); }
-.chapter:hover .chapter__img img { transform: scale(1.025); }
-.chapter__img { position: relative; }
-.chapter__img::after { content: ""; position: absolute; inset: 0; border-radius: var(--radius); box-shadow: inset 0 0 0 1px rgba(220, 195, 143, .25), inset 0 -90px 80px -40px rgba(21, 10, 13, .75); pointer-events: none; }
-.chapter__text h3 { text-shadow: 0 2px 24px rgba(0, 0, 0, .35); }
-.chapter__text p:first-of-type { font-size: 1.14rem; color: var(--gold-pale); opacity: 1; }
-@media (min-width: 860px) {
-  .chapter { grid-template-columns: 1.15fr 1fr; gap: clamp(36px, 5vw, 72px); }
-  .chapter--flip { grid-template-columns: 1fr 1.15fr; }
-  .chapter--flip .chapter__img { order: 2; }
-  .chapters { padding-left: 0; }
-  .chapters::before { left: 50%; }
-  .chapter::before { left: 50%; margin-left: -6px; top: 50%; margin-top: -6px; }
-  .chapter--flip::before { left: 50%; }
+/* El texto es el protagonista: letra grande, capitular y número romano; las láminas son pequeñas, con forma de arco. */
+.story { position: relative; isolation: isolate; overflow: hidden; }
+.story::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: radial-gradient(60% 38% at 85% 0%, rgba(220, 195, 143, .16), transparent 70%), radial-gradient(55% 40% at 0% 55%, rgba(109, 30, 45, .5), transparent 70%), radial-gradient(50% 35% at 100% 100%, rgba(109, 30, 45, .4), transparent 70%); }
+.story .section-head { display: block; text-align: center; max-width: 920px; margin: 0 auto clamp(70px, 10vw, 130px); }
+.story .section-head h2 { font-size: clamp(2.9rem, 7.6vw, 6rem); line-height: 1.02; letter-spacing: -.012em; color: #fff6ea; }
+.story .section-head h2 em { color: var(--gold-light); }
+.story .section-head .lead { max-width: 40ch; margin: 1.3em auto 0; font-family: var(--serif); font-style: italic; font-size: clamp(1.3rem, 2.5vw, 1.75rem); line-height: 1.4; color: var(--gold-pale); }
+.story .section-head::after { content: ""; display: block; width: 110px; height: 1px; margin: 2.4em auto 0; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
+
+.chapters { list-style: none; margin: 0 auto; padding: 0 0 0 44px; max-width: 1100px; display: grid; gap: clamp(96px, 13vw, 180px); position: relative; counter-reset: cap; }
+.chapters::before { content: ""; position: absolute; left: 6px; top: 0; bottom: 0; width: 1px; background: linear-gradient(var(--gold), rgba(180, 141, 76, .12)); }
+.chapter { position: relative; display: grid; grid-template-columns: 1fr; gap: 38px; counter-increment: cap; }
+.chapter::before { content: ""; position: absolute; left: -44px; top: .6em; width: 13px; height: 13px; border-radius: 50%; background: var(--gold-light); box-shadow: 0 0 0 5px rgba(180, 141, 76, .2), 0 0 24px rgba(220, 195, 143, .6); }
+
+.chapter__text { position: relative; }
+.chapter__text::before { content: counter(cap, upper-roman); position: absolute; top: -.5em; left: -.05em; z-index: 0; font-family: var(--serif); font-style: italic; font-weight: 500; font-size: clamp(7.5rem, 24vw, 14rem); line-height: 1; color: transparent; -webkit-text-stroke: 1px rgba(220, 195, 143, .3); pointer-events: none; }
+.chapter__text > * { position: relative; z-index: 1; }
+.chapter__num { display: flex; align-items: center; gap: 14px; font-family: var(--sans); font-weight: 600; font-size: .74rem; line-height: 1; letter-spacing: .32em; text-transform: uppercase; color: var(--gold-light); }
+.chapter__num::after { content: ""; width: 56px; height: 1px; background: var(--gold); opacity: .6; }
+.chapter__text h3 { font-family: var(--serif); font-weight: 500; font-size: clamp(2.4rem, 5.4vw, 4.2rem); line-height: 1.04; letter-spacing: -.01em; margin: .4em 0 .7em; color: #fff6ea; text-shadow: 0 2px 30px rgba(0, 0, 0, .45); }
+.chapter__text p { font-family: var(--serif); font-weight: 500; font-size: clamp(1.3rem, 2.2vw, 1.55rem); line-height: 1.62; max-width: 31em; margin: 0 0 1em; color: rgba(243, 233, 218, .94); }
+.chapter__text p:first-of-type::first-letter { float: left; font-size: 4.7em; line-height: .78; padding: .06em .13em 0 0; color: var(--gold-light); }
+.chapter__text p + p { font-style: italic; color: var(--gold-pale); }
+
+.chapter__img { order: 2; margin: 0; justify-self: start; width: min(100%, 340px); }
+.chapter__img img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 170px 170px 6px 6px; border: 1px solid rgba(220, 195, 143, .5); box-shadow: 0 0 0 7px rgba(21, 10, 13, .92), 0 0 0 8px rgba(220, 195, 143, .3), 0 34px 60px -26px rgba(0, 0, 0, .85); }
+.chapter__img figcaption { margin-top: 22px; text-align: center; font-family: var(--sans); font-weight: 600; font-size: .64rem; line-height: 1.4; letter-spacing: .22em; text-transform: uppercase; color: var(--gold-light); opacity: .75; }
+
+.story .quote-band .quote { max-width: 22em; margin: 0 auto; text-align: center; font-style: italic; font-size: clamp(1.9rem, 4.6vw, 3.4rem); line-height: 1.2; color: #fff6ea; }
+.story .quote-band .quote cite { display: block; margin-top: 1.4em; font-family: var(--sans); font-style: normal; font-weight: 600; font-size: .78rem; letter-spacing: .28em; text-transform: uppercase; color: var(--gold-light); }
+
+@media (min-width: 900px) {
+  .chapters { padding-left: 64px; }
+  .chapter { grid-template-columns: minmax(0, 1fr) 340px; gap: clamp(48px, 6vw, 100px); align-items: center; }
+  .chapter--flip { grid-template-columns: 340px minmax(0, 1fr); }
+  .chapter--flip .chapter__img { order: 0; justify-self: end; }
+  .chapter::before { left: -64px; }
 }
-/* La línea se va dibujando al hacer scroll (navegadores que lo soportan) */
+
+/* El texto aparece al hacer scroll y la línea se va dibujando (navegadores que lo soportan) */
 @media (prefers-reduced-motion: no-preference) {
   @supports (animation-timeline: view()) {
     .chapters::after { content: ""; position: absolute; left: 6px; top: 0; bottom: 0; width: 1px; background: var(--gold-light); transform-origin: top; animation: cap-linea linear both; animation-timeline: view(); animation-range: entry 10% cover 60%; }
-    @media (min-width: 860px) { .chapters::after { left: 50%; } }
+    .chapter__text h3, .chapter__text p { animation: cap-texto linear both; animation-timeline: view(); animation-range: entry 5% cover 28%; }
+    .chapter__img img { animation: cap-lamina linear both; animation-timeline: view(); animation-range: entry 0% cover 35%; }
   }
 }
 @keyframes cap-linea { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+@keyframes cap-texto { from { opacity: .1; transform: translateY(28px); } to { opacity: 1; transform: none; } }
+@keyframes cap-lamina { from { opacity: .2; transform: scale(.94); } to { opacity: 1; transform: none; } }
 
 /* ---------- Ajustes de páginas ---------- */
 .testimonial-grid .vcard { aspect-ratio: 4 / 5; }
