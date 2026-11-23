@@ -919,6 +919,45 @@ h1 em, h2 em, h3 em { font-style: italic; color: var(--wine); }
   .marquee__track { animation: none; }
 }
 
+/* ---------- Historia por capítulos (Cantoría Re-Quinto) ---------- */
+.chapters { list-style: none; margin: 0; padding: 0; display: grid; gap: clamp(64px, 9vw, 120px); }
+.chapter { display: grid; grid-template-columns: 1fr; gap: 28px; align-items: center; }
+.chapter__img { margin: 0; }
+.chapter__img img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--radius); box-shadow: var(--shadow); border: 1px solid var(--line-dark); }
+.chapter__img figcaption { margin-top: 10px; font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; opacity: .6; }
+.chapter__num { display: block; font-family: var(--sans); font-size: .72rem; letter-spacing: .24em; text-transform: uppercase; color: var(--gold-light); }
+.chapter__text h3 { font-family: var(--serif); font-weight: 500; font-size: clamp(1.9rem, 3.6vw, 2.8rem); line-height: 1.12; margin: .35em 0 .6em; }
+.chapter__text p { font-size: 1.04rem; line-height: 1.8; max-width: 58ch; opacity: .92; margin: 0 0 .9em; }
+.story { position: relative; isolation: isolate; }
+.story::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: radial-gradient(60% 40% at 85% 0%, rgba(220, 195, 143, .14), transparent 70%), radial-gradient(50% 35% at 0% 100%, rgba(109, 30, 45, .45), transparent 70%); }
+.chapters { position: relative; padding-left: 44px; }
+.chapters::before { content: ""; position: absolute; left: 6px; top: 0; bottom: 0; width: 1px; background: linear-gradient(var(--gold), rgba(180, 141, 76, .15)); }
+.chapter { position: relative; }
+.chapter::before { content: ""; position: absolute; left: -44px; top: .55em; width: 13px; height: 13px; border-radius: 50%; background: var(--gold-light); box-shadow: 0 0 0 5px rgba(180, 141, 76, .18), 0 0 22px rgba(220, 195, 143, .55); }
+.chapter__img img { transition: transform 1.4s var(--ease), filter 1.4s var(--ease); }
+.chapter:hover .chapter__img img { transform: scale(1.025); }
+.chapter__img { position: relative; }
+.chapter__img::after { content: ""; position: absolute; inset: 0; border-radius: var(--radius); box-shadow: inset 0 0 0 1px rgba(220, 195, 143, .25), inset 0 -90px 80px -40px rgba(21, 10, 13, .75); pointer-events: none; }
+.chapter__text h3 { text-shadow: 0 2px 24px rgba(0, 0, 0, .35); }
+.chapter__text p:first-of-type { font-size: 1.14rem; color: var(--gold-pale); opacity: 1; }
+@media (min-width: 860px) {
+  .chapter { grid-template-columns: 1.15fr 1fr; gap: clamp(36px, 5vw, 72px); }
+  .chapter--flip { grid-template-columns: 1fr 1.15fr; }
+  .chapter--flip .chapter__img { order: 2; }
+  .chapters { padding-left: 0; }
+  .chapters::before { left: 50%; }
+  .chapter::before { left: 50%; margin-left: -6px; top: 50%; margin-top: -6px; }
+  .chapter--flip::before { left: 50%; }
+}
+/* La línea se va dibujando al hacer scroll (navegadores que lo soportan) */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .chapters::after { content: ""; position: absolute; left: 6px; top: 0; bottom: 0; width: 1px; background: var(--gold-light); transform-origin: top; animation: cap-linea linear both; animation-timeline: view(); animation-range: entry 10% cover 60%; }
+    @media (min-width: 860px) { .chapters::after { left: 50%; } }
+  }
+}
+@keyframes cap-linea { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+
 /* ---------- Ajustes de páginas ---------- */
 .testimonial-grid .vcard { aspect-ratio: 4 / 5; }
 .video-grid h3 { font-size: 1.5rem; margin: 0 0 .3em; }
