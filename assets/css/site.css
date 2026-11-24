@@ -971,6 +971,13 @@ h1 em, h2 em, h3 em { font-style: italic; color: var(--wine); }
 @keyframes cap-texto { from { opacity: .1; transform: translateY(28px); } to { opacity: 1; transform: none; } }
 @keyframes cap-lamina { from { opacity: .2; transform: scale(.94); } to { opacity: 1; transform: none; } }
 
+/* ---------- Galería en carrusel (Cantoría Re-Quinto) ---------- */
+.cgal .reel__track { grid-auto-columns: max-content; gap: 18px; align-items: start; padding-bottom: 30px; }
+.cgal__item { display: block; margin: 0; padding: 0; border: 0; background: none; cursor: zoom-in; text-align: left; font: inherit; color: inherit; scroll-snap-align: start; }
+.cgal__item img { display: block; height: clamp(230px, 40vw, 390px); width: auto; border-radius: 6px; box-shadow: var(--shadow); transition: transform 1s var(--ease), filter .5s; filter: saturate(.9); }
+.cgal__item:hover img, .cgal__item:focus-visible img { transform: translateY(-4px); filter: saturate(1.05); }
+.cgal__item span { display: block; width: 0; min-width: 100%; margin-top: 12px; font-family: var(--serif); font-style: italic; font-size: 1.12rem; line-height: 1.3; color: var(--muted); }
+
 /* ---------- Ajustes de páginas ---------- */
 .testimonial-grid .vcard { aspect-ratio: 4 / 5; }
 .video-grid h3 { font-size: 1.5rem; margin: 0 0 .3em; }

@@ -649,7 +649,7 @@
   }
 
   function initGallery() {
-    $$('.gallery').forEach(g => {
+    $$('.gallery, .cgal').forEach(g => {
       const items = $$('[data-full]', g);
       items.forEach((b, k) => b.addEventListener('click', () => {
         modal.open('', b);
