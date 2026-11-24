@@ -840,7 +840,6 @@ h1 em, h2 em, h3 em { font-style: italic; color: var(--wine); }
 @keyframes noteIn { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
 .intro__name { margin: 0; font: 500 clamp(2.6rem, 8vw, 5rem)/1 var(--serif); letter-spacing: .02em; opacity: 0; animation: fadeUp 1s var(--ease) .5s forwards; }
 .intro__sub { margin: 14px 0 34px; font-size: .74rem; letter-spacing: .32em; text-transform: uppercase; color: var(--gold); opacity: 0; animation: fadeUp 1s var(--ease) .8s forwards; }
-.intro__note { margin: -14px 0 30px; font: italic 400 clamp(1.05rem, 2.6vw, 1.3rem)/1.3 var(--serif); color: var(--ivory); opacity: 0; animation: fadeUp 1s var(--ease) 1s forwards; }
 .intro__actions { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; opacity: 0; animation: fadeUp 1s var(--ease) 1.2s forwards; }
 .intro__actions .btn--ghost { color: var(--gold-pale); }
 .intro.is-opening .intro__curtain--l { transform: translateX(-102%); }
