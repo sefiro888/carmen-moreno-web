@@ -278,7 +278,7 @@ h1 em, h2 em, h3 em { font-style: italic; color: var(--wine); }
 
 .nav__list { display: flex; gap: 4px; list-style: none; margin: 0; padding: 0; }
 .nav__item { position: relative; }
-.nav__link { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 0 14px; font-size: .9rem; font-weight: 500; text-decoration: none; letter-spacing: .02em; position: relative; }
+.nav__link { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 0 14px; font-size: .9rem; font-weight: 500; text-decoration: none; letter-spacing: .02em; position: relative; white-space: nowrap; }
 .nav__link::after { content: ""; position: absolute; left: 14px; right: 14px; bottom: 8px; height: 1px; background: var(--gold); transform: scaleX(0); transform-origin: left; transition: transform .4s var(--ease); }
 .nav__link:hover::after, .nav__link[aria-current]::after { transform: scaleX(1); }
 .nav__caret { width: 9px; height: 6px; fill: none; stroke: currentColor; stroke-width: 1.4; transition: transform .3s; }
@@ -977,6 +977,42 @@ h1 em, h2 em, h3 em { font-style: italic; color: var(--wine); }
 .cgal__item img { display: block; height: clamp(230px, 40vw, 390px); width: auto; border-radius: 6px; box-shadow: var(--shadow); transition: transform 1s var(--ease), filter .5s; filter: saturate(.9); }
 .cgal__item:hover img, .cgal__item:focus-visible img { transform: translateY(-4px); filter: saturate(1.05); }
 .cgal__item span { display: block; width: 0; min-width: 100%; margin-top: 12px; font-family: var(--serif); font-style: italic; font-size: 1.12rem; line-height: 1.3; color: var(--muted); }
+
+/* ---------- Formas de pago (El libro) ---------- */
+.paygrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(20px, 3vw, 36px); max-width: 980px; margin: 0 auto; }
+.pay { display: flex; flex-direction: column; overflow: hidden; border-radius: 16px; background: #fff; border: 1px solid var(--line); box-shadow: 0 30px 60px -38px rgba(40, 10, 18, .5); transition: transform .5s var(--ease), box-shadow .5s var(--ease); }
+.pay:hover { transform: translateY(-6px); box-shadow: 0 44px 70px -36px rgba(40, 10, 18, .6); }
+.pay__head { display: flex; align-items: center; flex-wrap: wrap; gap: 12px 14px; padding: 22px 28px; color: #fff; }
+.pay__head svg { width: 36px; height: 36px; flex: none; fill: currentColor; }
+.pay__brand { font-family: var(--sans); font-weight: 800; font-style: italic; font-size: 1.6rem; line-height: 1; letter-spacing: -.02em; }
+.pay__tag { margin-left: auto; padding: 7px 12px; border-radius: 999px; border: 1px solid rgba(255, 255, 255, .35); background: rgba(255, 255, 255, .14); font-family: var(--sans); font-weight: 600; font-size: .64rem; line-height: 1; letter-spacing: .14em; text-transform: uppercase; white-space: nowrap; }
+.pay--paypal .pay__head { background: linear-gradient(135deg, #003087 0%, #0a4cb8 62%, #009cde 135%); }
+.pay--bank .pay__head { background: linear-gradient(135deg, var(--wine-deep), var(--wine) 70%, #8a2a3c); }
+.pay--bank .pay__head svg { fill: none; stroke: var(--gold-light); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.pay--bank .pay__brand { font-family: var(--serif); font-style: normal; font-weight: 500; font-size: 1.75rem; }
+.pay__body { display: flex; flex-direction: column; gap: 16px; flex: 1; padding: 28px; }
+.pay__body p { margin: 0; font-size: .98rem; color: var(--ink-2); }
+.pay__body .small { font-size: .84rem; color: var(--muted); }
+.pay__price { display: flex; align-items: baseline; flex-wrap: wrap; gap: 6px 14px; }
+.pay__body .pay__price b { font-family: var(--sans); font-size: 3rem; line-height: 1; font-weight: 800; letter-spacing: -.02em; font-variant-numeric: lining-nums; color: var(--wine); }
+.pay--paypal .pay__price b { color: #003087; }
+.pay__body .pay__price span { font-size: .84rem; color: var(--muted); }
+.pay__steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; counter-reset: paso; }
+.pay__steps li { counter-increment: paso; display: grid; grid-template-columns: 34px 1fr; gap: 14px; align-items: start; font-size: .97rem; line-height: 1.5; color: var(--ink-2); }
+.pay__steps li::before { content: counter(paso); width: 32px; height: 32px; margin-top: -3px; border-radius: 50%; display: grid; place-items: center; background: linear-gradient(135deg, var(--gold-light), var(--gold)); color: #fff; font-family: var(--sans); font-weight: 700; font-size: .95rem; line-height: 1; font-variant-numeric: lining-nums; box-shadow: 0 6px 14px -8px rgba(109, 30, 45, .7); }
+.pay__btn { margin-top: auto; display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 16px 28px; border-radius: 999px; font-weight: 700; font-size: 1rem; text-decoration: none; transition: transform .3s var(--ease), box-shadow .3s, background .3s; }
+.pay__btn:hover { transform: translateY(-2px); }
+.pay__btn--paypal { background: #ffc439; color: #003087; box-shadow: 0 12px 26px -14px rgba(0, 48, 135, .7); }
+.pay__btn--paypal:hover { background: #ffb800; }
+.pay__btn--paypal svg { width: 22px; height: 22px; fill: #003087; }
+.pay__btn--paypal i { font-style: italic; font-weight: 800; letter-spacing: -.02em; color: #009cde; }
+.pay__btn--paypal i b { font-weight: 800; color: #003087; }
+.pay__btn--wine { background: var(--wine); color: #fff6ea; box-shadow: 0 12px 26px -14px rgba(59, 15, 25, .8); }
+.pay__btn--wine:hover { background: var(--wine-deep); }
+.paygrid:has(> .pay:only-child) { grid-template-columns: minmax(0, 520px); justify-content: center; }
+@media (max-width: 860px) { .paygrid { grid-template-columns: minmax(0, 1fr); } .paygrid:has(> .pay:only-child) { grid-template-columns: minmax(0, 520px); } }
+/* Con seis enlaces en el menú, en pantallas medianas se aprieta un poco para que ninguno se parta en dos líneas */
+@media (min-width: 1041px) and (max-width: 1400px) { .site-header__inner { gap: 16px; } .nav__link { padding: 0 9px; font-size: .86rem; } .nav__link::after { left: 9px; right: 9px; } }
 
 /* ---------- Ajustes de páginas ---------- */
 .testimonial-grid .vcard { aspect-ratio: 4 / 5; }
